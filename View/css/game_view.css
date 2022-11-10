@@ -1,0 +1,105 @@
+body 
+{
+    min-width: 320px;
+    position: relative;
+    background-color: bisque;
+    font-family: "BEBASNEUE BOLD", sans-serif;
+}
+
+.elo_test_section.game_details
+{
+    position: static;
+    transform: none;
+}
+
+.elo_test_section
+{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    border: 10px solid white;
+    border-radius: 25px;
+    padding: 10px;
+    min-width: 320px;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.elo_test_roll_section
+{
+	column-count: 2;
+	
+}
+
+.elo_test_roll_pieces
+{
+	column-count: 5;
+}
+.game_details input
+{
+    max-width: 40%;
+}
+
+.deployments_area ul
+{
+    list-style-type: none;
+}
+
+.create_turn_button
+{
+    margin-top:20px;
+}
+
+.turn_button 
+{
+    display: block;
+    margin: auto;
+}
+
+.header
+{
+    height: 30px;
+    background-color: lightgrey;
+    font-size: 20px;
+    font-family: Verdana;
+    position: relative;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.hidden
+{
+    display: none;
+}
+
+
+.round_container
+{
+    width: fit-content;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 15px;
+}
+
+.back_to_lobby
+{
+    position: absolute;
+    left: 5px;
+    bottom: 1px;
+    top: 1px;
+    font-size: 15px;
+}
+
+
+.pip_r{
+    fill:#F79C8D;
+}
+
+.blue_pips .pip_r{
+    fill:#93BEE5;
+}

@@ -1,0 +1,143 @@
+.deployments-area.elo-action-screen
+{
+    width: 75%;
+    max-width: 700px;
+    padding-bottom: 14px;
+    padding-top: 0;
+}
+
+.deployments-title.elo-header
+{
+    font-size: 53px;
+}
+
+.deployments-area ul
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+.resource-num
+{
+    font-size: 25px;
+}
+
+.input-state-deployments
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 15px;
+}
+
+.input-state-deployments li
+{
+    padding-top: 25px;
+    position: relative;
+    width: 35px;
+    height: 275px;
+}
+
+input.state-slider
+{
+  -webkit-appearance: none;
+  height: 100%;
+  border-radius: 15px;
+  background: white;
+  outline: none;
+  opacity: 0.7;
+  -moz-transition: .2s;
+  -o-transition: .2s;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  cursor: pointer;
+  
+  position: absolute;
+  height: 25px;
+  width: 200px;
+  transform: rotate(270deg);
+  bottom: 40px;
+  left: 18px;
+  transform-origin: left;
+}
+
+input.state-slider:hover {
+  opacity: 1;
+}
+
+input.state-slider::-webkit-slider-thumb {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: url("../images/blue_on.svg");
+  cursor: pointer;
+}
+
+.red input.state-slider::-webkit-slider-thumb
+{
+  background: url("../images/red_on.svg");
+}
+
+input.state-slider::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: url("../images/blue_on.svg");
+  cursor: pointer;
+}
+
+.red input.state-slider::-moz-range-thumb
+{
+  background: url("../images/red_on.svg");
+}
+
+.state-slider-label
+{
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.state-pip-display
+{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+@media only screen and (max-width: 768px) {
+    .deployments-title
+    {
+        font-size: 20px;
+    }
+
+  .input-state-deployments li
+  {
+      height: 230px;
+      width: 10px;
+  }
+  
+  input.state-slider
+  {
+      width: 150px;
+      height: 10px;
+      left: 8px;
+  }
+  input.state-slider::-webkit-slider-thumb {
+      width: 15px;
+      height: 15px;
+  }
+    
+    input.state-slider::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+    }
+}

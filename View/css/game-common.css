@@ -1,0 +1,130 @@
+.blue .color-text
+{
+    color: darkblue;
+}
+
+.red .color-text
+{
+    color: darkred;
+}
+
+.game-confirm
+{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px;
+    font-size: 25px;
+    background: lightgreen;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.elo-action-screen
+{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    border: 10px solid white;
+    border-radius: 25px;
+    padding: 10px;
+    min-width: 320px;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.blue .elo-action-screen
+{
+    background: rgb(157,172,197);
+    background: linear-gradient(180deg, rgba(157,172,197,1) 0%, rgba(249,228,197,1) 100%);
+}
+
+.red .elo-action-screen
+{
+    background: rgb(240,105,97);
+    background: linear-gradient(180deg, rgba(240,105,97,1) 0%, rgba(249,228,197,1) 100%);
+}
+
+.elo-prompt
+{
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    min-width: 320px;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 25px;
+}
+
+.elo-prompt::after
+{
+    display: block;
+    width: 100%;
+    position: absolute;
+    content: "";
+    box-shadow: 0px 0px 40px 55px rgb(0 0 0 / 75%);
+    -webkit-box-shadow: 0px 0px 40px 55px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 0px 0px 40px 55px rgba(0,0,0,0.75);
+    z-index: -1;
+}
+
+.elo-button
+{
+    padding: 10px 50px;
+    border-radius: 10px;
+    transition: all .05s;
+    border: 3px solid white;
+    font-family: "BebasNeue Bold";
+    font-size: 20px;
+}
+
+button.elo-button:hover
+{
+    transform: scale(1.1, 1.05);
+}
+
+.blue .elo-button
+{
+    background: #9dacc5;
+    color: darkblue;
+}
+
+.red .elo-button
+{
+    background: #f06961;
+    color: darkred;
+}
+
+.elo-header
+{
+    
+}
+
+.elo-header
+{
+    margin-bottom: 15px;
+    font-family: 'BebasNeue Bold';
+    font-size: 35px;
+}
+
+.red .elo-header
+{
+    color: darkred;
+}
+
+.blue .elo-header
+{
+    color: darkblue;
+}

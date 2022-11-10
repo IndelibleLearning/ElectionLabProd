@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"  
+     width="52px" 
+     height="52px" 
+     viewBox="0 0 26 26">
+<defs>
+	<style>
+	.cls-1{fill:#397dbf;stroke:#232b64;}
+	.cls-1,.cls-2{stroke-miterlimit:10;stroke-width:.5px;}
+	.cls-2{fill:#fff;stroke:#232b64;}		
+	</style>
+</defs>
+	<rect class="cls-1" x=".25" y=".25" width="25" height="25" rx="2.58" ry="2.58"/>
+	<circle class="cls-2" cx="12.75" cy="12.75" r="2.875"/>
+	<circle class="cls-2" cx="12.75" cy="12.75" r="1.5"/>
+	<circle class="cls-2" cx="5.25" cy="5.25" r="2.875"/>
+	<circle class="cls-2" cx="20.25" cy="20.25" r="2.875"/>
+	<circle class="cls-2" cx="5.25" cy="5.25" r="1.5"/>
+	<circle class="cls-2" cx="20.25" cy="20.25" r="1.5"/>
+</svg>

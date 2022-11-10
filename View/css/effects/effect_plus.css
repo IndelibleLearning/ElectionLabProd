@@ -1,0 +1,18 @@
+.effect_plus_confirm
+{
+    margin-top: 15px;
+}
+
+.effect_plus_states
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.effect_plus_states .selected
+{
+    background-color: lightgreen;
+}

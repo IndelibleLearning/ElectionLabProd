@@ -1,0 +1,50 @@
+.elo_test_section.post-game-area
+{
+    width: 100%;
+    z-index: 3;
+}
+
+.strategies
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+}
+
+.post-game-strategy
+{
+    flex-shrink: 1;
+    flex-basis: 25%;
+    padding-top: 20px;
+}
+
+.post-game-strategy.correct
+{
+    border: 2px solid green;
+}
+
+.strategy-letter
+{
+    font-size: 25px;
+    color: #A01E21;
+}
+
+.strategy-image
+{
+    width: 100%;
+}
+
+.strategy-image svg
+{
+    width: 100%;
+}
+
+input.strategy-radio
+{
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

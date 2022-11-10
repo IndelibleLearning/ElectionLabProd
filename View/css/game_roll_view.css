@@ -1,0 +1,109 @@
+.roll-area
+{
+    padding: 20px 30px;
+}
+
+.dice-roll-container
+{
+    display: flex;
+    gap: 8px;
+}
+
+.blue .roll-area
+{
+    background: rgb(157,172,197);
+    background: linear-gradient(180deg, rgba(157,172,197,1) 0%, rgba(249,228,197,1) 100%);
+}
+
+.red .roll-area
+{
+    background: rgb(240,105,97);
+    background: linear-gradient(180deg, rgba(240,105,97,1) 0%, rgba(249,228,197,1) 100%);
+}
+
+.dice-area h3 
+{
+    font-size: 35px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.red .dice-area h3 
+{
+    color: darkred;
+}
+
+.blue .dice-area h3 
+{
+    color: darkblue;
+}
+
+.title-pips-container
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+    flex-grow: 1;
+    flex-basis: 30%;
+}
+
+.pips-row
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+.roll-pip
+{
+    width: 19%;
+    height: 19%;
+}
+
+.roll-title
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.roll_title_state
+{
+    flex-grow: 2;
+    flex-basis: 200px;
+}
+
+.roll_title_no_pieces
+{
+    font-size: 20px;
+}
+
+.round_winner
+{
+    padding-bottom: 15px;
+}
+
+.state_bg
+{
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .state_bg
+    {
+        height: 100%;
+    }
+}
+/*
+@media screen and (min-width: 1024px) {
+    .roll_title_state
+    {
+        display: block;
+        height: 100%;
+    }
+}*/

@@ -1,0 +1,236 @@
+.game-label.elo-action-screen
+{
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    z-index: 2;
+    transform: translatex(-50%);
+    border-radius: 5px;
+    border: 5px solid white;
+    width: 320%;
+    height: 60px;
+    min-width: 0;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .game-label.elo-action-screen
+    {
+        height: 70px;
+        font-size: 25px;
+        white-space: nowrap;
+    }
+}
+
+.turn-display
+{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    width: 100px;
+    height: 25px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: #dddddd;
+}
+
+.map-section
+{
+    width: 100%;
+    /*background-image: url("../images/game_assets/MockupFlattenedGuide.png");*/
+    background-image: url("../images/game_assets/OvalFloorBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.map-background 
+{
+    width: 100%;
+}
+
+.map-foreground
+{
+}
+
+.map-year
+{
+    width: 25%;
+    max-width: 225px;
+    padding-top: 17px;
+}
+
+
+.votes-container {
+    width: 5%;
+    height: 50px;
+    position: relative;
+    top: 15px;
+}
+
+.map-votes
+{
+    width: 280%;
+    min-width: 88px;
+    max-width: 215px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.score-area
+{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /*gap: 100px;*/
+    position: relative;
+    padding-top: 40px;
+}
+
+.bar-star
+{
+    width: 60px;
+}
+
+.star
+{
+    position: absolute;
+    top: -22px;
+    right: -25px;
+}
+
+.bar
+{
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+
+
+.bar-fill
+{
+    height: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.red-scorecard .bar-fill
+{
+    background-color: #F07763;
+}
+
+.blue-scorecard .bar-fill
+{
+    background-color: #698DC5;
+}
+
+.score 
+{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: white;
+    font-size: 20px;
+}
+
+.scorecard {
+    width: 30%;
+    margin-top: 15px;
+    position: relative;
+    margin-top: 31px;
+}
+
+
+.red-scorecard
+{
+}
+
+.scorecard .player-name
+{
+    position: absolute;
+    top: -27px;
+    font-size: 25px;
+}
+
+.blue-scorecard .player-name
+{
+    left: 5px;
+}
+
+.red-scorecard .player-name
+{
+    right: 5px;
+}
+
+.red-scorecard .bar
+{
+    transform: rotate(180deg);
+}
+
+.red-scorecard .bar-star
+{
+    transform: rotate(180deg);
+}
+
+.red-scorecard .star
+{
+    top: -15px;
+}
+
+.red-scorecard .score
+{
+    transform: rotate(180deg);
+    top: 10px;
+    right: 17px;
+}
+
+.play-area
+{
+    padding-top: 35px;
+    position: relative;
+}
+
+.map-image-container
+{
+    width: 72%;
+}
+
+.cards-area
+{
+    width: 20%;
+}
+
+.won-red
+{
+    fill: #A22934; 
+}
+
+.won-blue
+{
+    fill: #383969; 
+}
+
+
+.selectable-state path
+{
+    stroke: #ba9550;
+    stroke-width: 3px;
+}
+
+.selectable-state:hover path
+{
+    fill: #ba9550;
+    cursor: pointer;
+}
+
+.selectable-state.selected path
+{
+    fill: lightgreen;
+}
+

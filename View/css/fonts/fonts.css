@@ -1,0 +1,46 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'Copperplate-lt';
+  font-style: normal;
+  font-weight: lighter;
+  src: url('copperl.woff') format('woff');  
+}
+
+@font-face {
+  font-family: 'Copperplate-bd';
+  font-style: normal;
+  font-weight: bold;
+  src: url('copperb.woff') format('woff');  
+}
+
+@font-face {
+  font-family: 'Roboto Condensed Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('RobotoCondensed-Light.ttf');  
+}
+
+@font-face {
+  font-family: 'Monserat';
+  font-style: normal;
+  font-weight: normal;
+  src: url('Montserrat-Regular.woff2');  
+}
+
+@font-face {
+  font-family: 'BebasNeue Bold';
+  font-style: normal;
+  font-weight: bold;
+  src: url('BebasNeue-Bold.ttf');  
+}
+
+@font-face {
+  font-family: 'BebasNeue';
+  font-style: normal;
+  font-weight: normal;
+  src: url('BebasNeue-Regular.ttf');  
+}
+
+
+
+
