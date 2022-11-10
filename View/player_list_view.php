@@ -19,7 +19,7 @@
                   <h1 class="title">Room Code: <span id="title_room_code"></span></h1>
                   <div class="instructions">
                       <div class="join_prompt">To join, go to:</div>
-                      <div class="join_link">https://indeliblelearning.com/electionlab</div> 
+                      <div class="join_link" id="join-link">https://indeliblelearning.com/electionlab</div>
                   </div>
                   <div id="player_name_container" class="hidden player_name_container">
                       You are joined as <span id="player_name_display"></span>

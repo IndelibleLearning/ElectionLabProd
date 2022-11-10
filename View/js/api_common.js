@@ -1,5 +1,8 @@
-export const API_URL_BASE = "https://indeliblelearning.com/test/david/Controller/Api/";
-export const VIEW_URL_BASE = "https://indeliblelearning.com/test/david/View/";
+import * as urls from "./urls.js";
+
+export const API_URL_BASE = urls.API_URL_BASE;
+export const VIEW_URL_BASE = urls.VIEW_URL_BASE;
+export const PLAYER_JOIN_URL = urls.PLAYER_JOIN_URL;
 
 export function get_request(url)
 {

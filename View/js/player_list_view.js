@@ -1,7 +1,7 @@
 import * as request from "./request.js";
 import * as user_common from "./user_common.js";
 import * as player_common from "./player_common.js";
-
+import * as api_common from "./api_common.js";
 
 const matchedPlayerList = document.querySelector("#matched_player_list");
 const unmatchedPlayerList = document.querySelector("#unmatched_player_list");
@@ -12,6 +12,7 @@ const eventModeButtonContainer = document.querySelector("#event_mode_button_cont
 const eventModeButton = document.querySelector("#event_mode_button");
 const joinGameButton = document.querySelector("#join_game_button");
 const newGameButton = document.querySelector("#new_game_button");
+const joinUrl = document.querySelector("#join-link");
 let room_code = "";
 
 const CHECK_MATCH_RATE_MS = 1000;
@@ -26,6 +27,7 @@ let eventsEnabled = false;
 function setup()
 {
     room_code = request.queryParam("room_code");
+    setupJoinUrl();
     setupRoomCodeDisplay();
     setupPlayerNameDisplay();
     if (player_common.getPlayerFinishedGame())
@@ -41,6 +43,11 @@ function setup()
     setupEventModeButton();
 }
 setup();
+
+function setupJoinUrl()
+{
+    joinUrl.innerHTML = api_common.PLAYER_JOIN_URL;
+}
 
 function setupRoomCodeDisplay()
 {

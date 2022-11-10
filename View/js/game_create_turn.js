@@ -174,10 +174,11 @@ function checkShowCreateTurn()
 function setupTurnCallback(e)
 {
     // only lets single click get past here
-    if (e.detail !== SINGLE_CLICK_CODE)
+    /*if (e.detail !== SINGLE_CLICK_CODE)
     {
         return;
     }
+     */
     if (!game_map.chosenState)
     {
         alert("You have to choose a state");
