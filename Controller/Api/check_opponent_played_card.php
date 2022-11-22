@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/../../inc/bootstrap.php';
+require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
 require_once PROJECT_ROOT_PATH . "/Model/GameModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/TurnModel.php";
 require_once PROJECT_ROOT_PATH . "/Model/PlayerModel.php";

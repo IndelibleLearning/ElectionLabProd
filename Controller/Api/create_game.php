@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once "/home/indeli9/public_html/test/david/inc/bootstrap.php";
+    require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
     require_once PROJECT_ROOT_PATH . "/Model/ElectionYearModel.php";
     require_once PROJECT_ROOT_PATH . "/Model/RoomModel.php";
     require_once PROJECT_ROOT_PATH . "/Model/GameModel.php";

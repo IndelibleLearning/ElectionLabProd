@@ -1,5 +1,5 @@
 <?php
-    require_once "/home/indeli9/public_html/test/david/inc/bootstrap.php";
+    require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
     require_once PROJECT_ROOT_PATH . "/Model/ApiResponse.php";
     require_once PROJECT_ROOT_PATH . "/Model/PlayerModel.php";
     require_once PROJECT_ROOT_PATH . "/Controller/Api/RestHelper.php";

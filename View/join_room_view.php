@@ -1,5 +1,5 @@
 <?php
-    require_once "/home/indeli9/public_html/test/david/inc/bootstrap.php";
+    require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
 ?>
 
 <html>
