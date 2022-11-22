@@ -11,7 +11,7 @@
  </head>
  <body>
     <section class="intro">
-      <div class="bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/glassmorphism-article/img5.jpg');">
+      <div class="main-bg">
         <div class="mask d-flex align-items-center">
           <div class="container">
             <div class="row justify-content-center">
@@ -27,7 +27,7 @@
                 <div class="card mask-custom matched_players">
                   <div class="card-body p-5 text-white">
                     <div class="my-4">
-                        <button id="join_game_button" class="hidden match_players_button">Play Game</button>
+                        <button id="join_game_button" class="hidden match_players_button">Play Current Game</button>
                          <button id="new_game_button" class="hidden new_game_button">New Game</button>
                       <h2 class="text-center mb-5">Currently Playing</h2>
     

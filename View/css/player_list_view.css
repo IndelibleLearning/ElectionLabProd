@@ -1,3 +1,9 @@
+.intro,
+.mask.d-flex.align-items-center
+{
+    background-color: #e96656;
+}
+
 .title
 {
     color: white;
@@ -26,11 +32,12 @@
     position: relative;
 }
 
-.match_players_button_container
+.match_players_button
 {
     position: absolute;
     top: 20px;
     right: 40px;
+    border-radius: 5px;
 }
 
 .event_mode_button_container
@@ -44,7 +51,7 @@
 {
     position: absolute;
     top: 20px;
-    right: 120px;
+    right: 200px;
     border-radius: 5px;
 }
 

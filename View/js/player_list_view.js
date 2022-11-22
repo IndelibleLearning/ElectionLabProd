@@ -197,9 +197,9 @@ function autoMatch()
 
 function promptJoinGame(gameId)
 {
+    player_common.setPlayerGameId(gameId);
     if(confirm("Game found. Would you like to join the game?"))
     {
-        player_common.setPlayerGameId(gameId);
         window.location = player_common.GAME_URL;
     }
     else
