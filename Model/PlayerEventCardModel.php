@@ -38,14 +38,14 @@
         public function get_player_card_on_turn($player_id, $turn_created)
         {
             $param_types = "ii";
-            return $this->select("SELECT * FROM player_event_cards where player_id = ? AND turn_created = ?", $param_types, [$id, $turn_created]);
+            return $this->select("SELECT * FROM player_event_cards where player_id = ? AND turn_created = ?", $param_types, [$player_id, $turn_created]);
         }
         
         public function validate_card_not_drawn_on_turn($player_id, $turn_created)
         {
             $error_code = "player_event_card_already_drawn";
             $error_msg = "Already drew card on turn $turn_created for player with id $player_id";
-            $results = $this->get_player_card_on_turn($player_id, $turn_num);
+            $results = $this->get_player_card_on_turn($player_id, $turn_created);
             return ApiResponse::validate_is_empty($results, $error_code, $error_msg);
         }
         

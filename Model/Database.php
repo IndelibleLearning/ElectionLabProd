@@ -51,7 +51,7 @@
                 }
                 else 
                 {
-                    $result = "ERROR: Could not execute query: $sql. " . mysqli_error($connection);
+                    $result = "ERROR: Could not execute query: $query. " . mysqli_error($this->connection);
                 }
                 $stmt->close();
      
@@ -79,7 +79,7 @@
                 }
                 else 
                 {
-                    $result = "ERROR: Could not execute query: $sql. " . mysqli_error($connection);
+                    $result = "ERROR: Could not execute query: $query. " . mysqli_error($this->connection);
                 }
                 $stmt->close();
      

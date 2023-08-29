@@ -51,10 +51,10 @@
     
     // check we haven't already gotten a card for this turn
     // TODO: MIGHT NEED TO CHANGE THIS IF WE CAN DRAW MORE THAN ONE CARD
-    $cards_for_turn = $player_event_card_model->validate_card_not_drawn_on_turn($player_id, $turn_num);
+    $cards_for_turn = $player_event_card_model->validate_card_not_drawn_on_turn($player_id, $turn_created);
     if ($cards_for_turn->get_has_errors())
     {
-        echo $event_deck_results->get_json_error();
+        echo $cards_for_turn->get_json_error();
         die();
     }
     
