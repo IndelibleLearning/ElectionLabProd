@@ -23,6 +23,7 @@ const STANDARD_GAME_MODE_ID = 1;
 
 let autoMatchInterval = null;
 let eventsEnabled = false;
+let promptPlayerJoinGame = true;
 
 function setup()
 {
@@ -33,11 +34,10 @@ function setup()
     if (player_common.getPlayerFinishedGame())
     {
         promptForNewGame();
+        promptPlayerJoinGame = false;
     }
-    else
-    {
-        setupCheckForGame();
-    }
+
+    setupCheckForGame();
     loadPlayers();
     setupMatchButton();
     setupEventModeButton();
@@ -91,9 +91,17 @@ function checkGameStarted(player_name)
         if (res.data && res.data.game_id)
         {
             // we have a game so start the prompt
-            promptJoinGame(res.data.game_id)
-            return;
+            if (promptPlayerJoinGame)
+            {
+                promptJoinGame(res.data.game_id)
+            }
+            promptPlayerJoinGame = false;
         }
+        else
+        {
+            resetPlayer();
+        }
+
         
         setTimeout(checkGameStarted, CHECK_MATCH_RATE_MS, player_name);
     });
@@ -120,7 +128,7 @@ function loadPlayers()
             players.forEach(player => {
                 if (player.game_id)
                 {
-                    matchedPlayerList.appendChild(createPlayer(player));
+                    matchedPlayerList.appendChild(createPlayer(player, player.game_id));
                 }
                 else
                 {
@@ -133,10 +141,15 @@ function loadPlayers()
     })
 }
 
-function createPlayer(player)
+function createPlayer(player, gameId)
 {
     let playerContainer = document.createElement("div");
     playerContainer.innerHTML = player.player_name;
+
+    if (isHost() && gameId)
+    {
+        playerContainer.appendChild(createKillGameButton(gameId));
+    }
     
     if (player.player_name == player_common.getPlayerName())
     {
@@ -145,10 +158,44 @@ function createPlayer(player)
     return playerContainer;
 }
 
+function createKillGameButton(gameId)
+{
+    let button = document.createElement("button");
+    button.innerHTML = "End Game";
+    button.addEventListener("click", event => {
+        console.log(gameId);
+        killGame(gameId);
+        event.target.setAttribute("disabled", "true");
+    });
+    return button;
+}
+
+function killGame(gameId)
+{
+    let url = user_common.KILL_GAME_BASE + gameId;
+    request.get(url)
+        .then(res => {
+            if (res.has_errors)
+            {
+                console.log(res.err_msg);
+                return;
+            }
+
+            console.log("killed game " + gameId);
+
+        });
+}
+
+// TODO: Update this to actually check host of room
+function isHost()
+{
+    return user_common.getUserName() && user_common.getLoginToken();
+}
+
 function setupMatchButton()
 {
-    // only show if we are the "host" TODO: Update this to actually check host of room
-    if (user_common.getUserName() && user_common.getLoginToken())
+    // only show if we are the "host"
+    if (isHost())
     {
         matchPlayersButtonContainer.classList.remove("hidden");
         matchPlayersButton.checked = false;
@@ -253,11 +300,16 @@ function leaveGame()
         }
         
         alert("Reentered matching area")
-        joinGameButton.classList.add("hidden");
+        resetPlayer();
         newGameButton.classList.add("hidden");
-        player_common.resetPlayerFinishedGame();
-        setupCheckForGame();
     })
+}
+
+function resetPlayer()
+{
+    joinGameButton.classList.add("hidden");
+    player_common.resetPlayerFinishedGame();
+    promptPlayerJoinGame = true;
 }
 
 function setupEventModeButton()
