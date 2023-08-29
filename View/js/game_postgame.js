@@ -42,7 +42,6 @@ function setupPostgameEventListener()
 function setupSubmitPostGameAnswerButton()
 {
     answerQuestionButton.addEventListener("click", e => {
-        common.hide(answerQuestionButton);
         let chosenAnswer = null;
         
         for (let i = 0; i < radioChoices.length; i++) {
@@ -51,9 +50,25 @@ function setupSubmitPostGameAnswerButton()
             {
                 chosenAnswer = radio.value;
             }
+        }
+
+        if (!chosenAnswer)
+        {
+            alert("Please choose an answer");
+            return;
+        }
+
+        for (let i = 0; i < radioChoices.length; i++) {
+            const radio = radioChoices[i];
+            if (radio.checked)
+            {
+                chosenAnswer = radio.value;
+            }
             common.hide(radio);
         }
-        
+
+        common.hide(answerQuestionButton);
+
         let correct = document.querySelector(`${STRATEGY_CONTAINER_PREFIX}${correctAnswer}`);
         correct.classList.add("correct");
         //replaceStrategy("B", fake);

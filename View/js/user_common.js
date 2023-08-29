@@ -13,10 +13,12 @@ export const JOIN_ROOM_BASE = `${api_common.API_URL_BASE}/join_room.php`
 
 const MATCH_PLAYERS_BASE = `${api_common.API_URL_BASE}/match_players.php`
 
+export const KILL_GAME_BASE = `${api_common.API_URL_BASE}/kill_game.php?game_id=`
+
 // Views URL
 export const DASHBOARD_URL = `${api_common.VIEW_URL_BASE}/user_dashboard.php`
 const ROOM_URL_BASE = `${api_common.VIEW_URL_BASE}/player_list_view.php`;
-const LOGIN_VIEW_URL = `${api_common.VIEW_URL_BASE}login_view.php`;
+const LOGIN_VIEW_URL = `${api_common.VIEW_URL_BASE}/login_view.php`;
 
 export function setLoginToken(token)
 {

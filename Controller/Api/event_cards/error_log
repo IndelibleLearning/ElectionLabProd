@@ -1,8 +1,0 @@
-[30-Sep-2022 21:10:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_has_errors() on null in /home/indeli9/public_html/test/david/Controller/Api/event_cards/shift.php:55
-Stack trace:
-#0 {main}
-  thrown in /home/indeli9/public_html/test/david/Controller/Api/event_cards/shift.php on line 55
-[30-Sep-2022 21:11:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_has_errors() on null in /home/indeli9/public_html/test/david/Controller/Api/event_cards/shift.php:55
-Stack trace:
-#0 {main}
-  thrown in /home/indeli9/public_html/test/david/Controller/Api/event_cards/shift.php on line 55
