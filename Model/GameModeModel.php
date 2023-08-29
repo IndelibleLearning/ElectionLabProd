@@ -14,7 +14,7 @@
         public function validate_by_id($game_mode_id)
         {
             $error_code = "no_game_mode_found";
-            $error_msg = "Could not find game mode associated with id $game_id";
+            $error_msg = "Could not find game mode associated with id $game_mode_id";
             $results = $this->get_by_id($game_mode_id);
             return ApiResponse::validate_single_entry_not_empty($results, $error_code, $error_msg);
         }
