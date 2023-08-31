@@ -4,6 +4,11 @@ import * as gameMap from "./game_map.js";
 
 const IMG_PATH = "images/";
 
+const DICE_ANIMATION_DELAY = 1500;  // 1.5 seconds delay between each dice animation
+const FADE_IN_DURATION = 500;       // 0.5 seconds for fade-in duration
+const FADE_OUT_DURATION = 500;      // 0.5 seconds for fade-out duration
+const TIE_ANIMATION_DURATION = 500;
+
 const rollTitleState = document.querySelector("#roll_title_state");
 const rollTitleNoPieces = document.querySelector("#roll_title_no_pieces");
 const redPipsContainer = document.querySelector("#red_pips");
@@ -31,6 +36,7 @@ let state_abbrev = null;
 let state_EVs = null;
 let winner_name = null;
 let prevRoll = null;
+let showLoserAnimation = true;  // This is the flag that determines what happens when the "Next" button is clicked
 
 function setupRoll()
 {
@@ -191,26 +197,58 @@ function setupRollButton()
               let title = document.createElement("h3");
               title.innerHTML = `Round ${i + 1}`;
               round.appendChild(title);
-              
-              // dice rolls
-              let round_container = document.createElement("div");
-              round_container.classList.add(ROUND_CONTAINER_CLASS);
-              round.appendChild(round_container);
-              for (const [id, player_rolls] of Object.entries(rolls[i])) 
-              {
-                  let color = data["color_map"][id];
-                  let color_img_id = covert_color_id_to_img_name(color);
-                  let dice_container = document.createElement("div");
-                  dice_container.classList.add(DICE_CONTAINER_CLASS)
-                  for (let j=0; j < player_rolls.length; j++) 
-                  {
-                      var dice_img = new Image (48,48);
-                      dice_img.src = `${IMG_PATH}${color_img_id}${player_rolls[j].die_face}.svg`;
-                      dice_container.appendChild(dice_img);
-                  }
-                  round_container.appendChild(dice_container);
-                  //dice_area.innerHTML += "<br/>";
-              }
+
+               let round_container = document.createElement("div");
+               round_container.classList.add(ROUND_CONTAINER_CLASS);
+               round.appendChild(round_container);
+
+               let dice_container = document.createElement("div");
+               dice_container.classList.add(DICE_CONTAINER_CLASS);
+               round_container.appendChild(dice_container);
+
+               let maxNumRolls = Math.max(...Object.values(rolls[i]).map(player => player.length));
+
+               for (let j = 0; j < maxNumRolls; j++) {
+                   let column_container = document.createElement("div");
+                   column_container.classList.add('column-container');
+                   dice_container.appendChild(column_container);
+
+                   let playerRolls = [];
+                   let diceImages = [];
+
+                   for (const [id, player_rolls] of Object.entries(rolls[i])) {
+                       let dice_img;
+                       if (j < player_rolls.length) {
+                           let color = data["color_map"][id];
+                           let color_img_id = covert_color_id_to_img_name(color);
+
+                           dice_img = new Image(48,48);
+                           dice_img.src = `${IMG_PATH}${color_img_id}${player_rolls[j].die_face}.svg`;
+
+                           playerRolls.push(player_rolls[j].die_face);
+                           diceImages.push(dice_img);
+                       } else {
+                           dice_img = new Image(48,48);  // Placeholder or blank dice
+                           dice_img.src = `${IMG_PATH}placeholder_dice.svg`;  // Assuming you have a blank dice image
+
+                           playerRolls.push(0); // Assumes a blank die is treated as a roll of '0'
+                           diceImages.push(dice_img);
+                       }
+                       column_container.appendChild(dice_img);
+                   }
+                   if (playerRolls[0] > 0 && playerRolls[1] > 0) {  // Check if both players have a non-zero roll
+                       if (playerRolls[0] < playerRolls[1]) {
+                           diceImages[0].setAttribute("data-loser", "true");
+                       } else if (playerRolls[0] > playerRolls[1]) {
+                           diceImages[1].setAttribute("data-loser", "true");
+                       } else { // they are the same
+                           diceImages[0].setAttribute("data-tie", "true");
+                           diceImages[1].setAttribute("data-tie", "true");
+                       }
+                   }
+
+
+               }
            }
            
            winner_color = data.color_map[data.winner_id];
@@ -219,7 +257,7 @@ function setupRollButton()
            winner_name = data.winner_name;
            
            common.hide(roll_button);
-            common.hide(rollTitleContainer);    
+           common.hide(rollTitleContainer);
         
            if (numRounds == 1)
            {
@@ -238,32 +276,96 @@ function setupRollButton()
     });
 }
 
-function setupNextButton()
-{
-    nextButton.addEventListener("click", function(e)
-    {
-        if (currentRoll < numRounds)
-        {
+function convertToLoserImagePath(originalPath) {
+    return originalPath.replace('.svg', '_x.svg');
+}
+
+function animateDiceForRound(index) {
+    let roundElement = document.querySelector(`#round_${index}`);
+    let columnContainers = roundElement.querySelectorAll('.column-container');
+
+    // Disable the "next" button
+    nextButton.disabled = true;
+
+    let delay = 0;
+
+    columnContainers.forEach(column => {
+        let loserDice = column.querySelector('img[data-loser="true"]');
+        let tiedDices = column.querySelectorAll('img[data-tie="true"]');
+
+        if (loserDice) {
+            setTimeout(() => {
+                loserDice.src = convertToLoserImagePath(loserDice.src);
+                setTimeout(() => {
+                    loserDice.classList.add('fade-out');
+                    setTimeout(() => {
+                        // Replace the loser dice with a placeholder dice and fade it in
+                        loserDice.src = `${IMG_PATH}placeholder_dice.svg`;
+                        loserDice.classList.remove('fade-out');
+                    }, FADE_OUT_DURATION);
+                }, FADE_IN_DURATION);
+            }, delay);
+
+            delay += DICE_ANIMATION_DELAY;
+
+        } else if (tiedDices.length === 2) { // assuming two dice can be tied
+            let tiePopup = document.createElement('div');
+            tiePopup.textContent = 'TIE';
+            tiePopup.classList.add('tie-popup');
+            column.appendChild(tiePopup);
+
+            setTimeout(() => {
+                // Show the tie-popup
+                tiePopup.style.visibility = 'visible';
+                tiePopup.style.opacity = '1';
+            }, delay);
+
+            delay += TIE_ANIMATION_DURATION;
+        }
+
+    });
+
+    // Re-enable the "next" button after all animations are done
+    setTimeout(() => {
+        if (currentRoll >= numRounds) {
+            // We are finished
+            nextButton.classList.add("hidden");
+            updateMapAfterRoll(winner_color, state_abbrev, state_EVs, winner_name);
+            showAfterRollButton();
+        } else {
+            nextButton.disabled = false;
+        }
+    }, delay);
+}
+
+
+
+function setupNextButton() {
+    nextButton.addEventListener("click", function(e) {
+        console.log("clicked next " + showLoserAnimation);
+
+        if (showLoserAnimation) {
+            // Trigger the loser dice animation for the current round
+            animateDiceForRound(currentRoll - 1);  // Assuming currentRoll starts from 1
+
+            // Ensure the next click will advance to the next round
+            showLoserAnimation = false;
+        } else {
             let roundElement = document.querySelector(`#round_${currentRoll}`);
             common.show(roundElement);
-            if (prevRoll)
-            {
+            if (prevRoll) {
                 common.hide(prevRoll);
             }
             prevRoll = roundElement;
             currentRoll++;
             common.setContinueButton(nextButton);
-        }
-        
-        if (currentRoll >= numRounds)
-        {
-            // we are finished
-            nextButton.classList.add("hidden");
-            updateMapAfterRoll(winner_color, state_abbrev, state_EVs, winner_name);
-            showAfterRollButton();
+
+            // Ensure the next click will show the loser dice animation for the new round
+            showLoserAnimation = true;
         }
     });
 }
+
 
 function setupAfterRollButton()
 {
@@ -280,14 +382,14 @@ function setupRollTitle(currentStateAbbrev, deploymentData)
     stateImg.classList.add("state_bg");
     rollTitleNoPieces.innerHTML = "";
     resetRollPips();
-    
+
     let totalPieces = 0;
-    
+
     for (const playerName in deploymentData) {
         let data = deploymentData[playerName];
         let deployments = data.deployments;
         let numPiecesForState = 0;
-        
+
         deployments.every(deployment => {
             if (deployment.state_abbrev === currentStateAbbrev)
             {
@@ -297,13 +399,13 @@ function setupRollTitle(currentStateAbbrev, deploymentData)
             }
             return true;
         });
-        
+
         updateRollPips(data.color_id, numPiecesForState);
     }
-    
+
     rollTitleState.innerHTML = "";
     rollTitleState.appendChild(stateImg);
-    
+
     // add a message if neither side deployed pieces
     if (totalPieces ==0)
     {
@@ -336,7 +438,7 @@ function updateRollPips(colorId, numPieces)
     {
         pipsContainer = bluePipsContainer;
     }
-    
+
     if (pipsContainer)
     {
         let pips = pipsContainer.querySelectorAll(".roll-pip");
@@ -356,13 +458,13 @@ function updateMapAfterRoll(winner_color, state_abbrev, state_EVs, winner_name)
 {
     // update color map
     common.add_won_state(state_abbrev, winner_color);
-    
+
     // update player score map
     common.add_to_player_score_map(winner_name, state_EVs, winner_color);
-    
+
     // updates the visuals
     common.update_map();
-    
+
 }
 
 function showRoundWinner()
@@ -375,11 +477,11 @@ function showAfterRollButton()
 {
     // hide the roll button
     common.hide(rollButton);
-    
+
     common.show(afterRollButton);
     showRoundWinner();
     common.refresh_event_cards();
-    
+
     common.setContinueButton(after_roll_button);
 }
 
@@ -388,15 +490,15 @@ function hideRollArea()
     common.hide(rollArea);
     common.hide(afterRollButton);
     common.hide(roundWinnerArea);
-    
+
 }
 
 function goToCreateTurn()
 {
     hideRollArea();
-    
+
     // increase turn counter
     common.incrementTurn();
-    
+
     common.deploy_event(common.CREATE_TURN_EVENT);
 }

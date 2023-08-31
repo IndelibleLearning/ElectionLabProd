@@ -15,7 +15,7 @@ body
 .elo_test_section
 {
     text-align: center;
-    width: 50%;
+    max-width: 75%;
     margin: auto;
     border: 10px solid white;
     border-radius: 25px;
@@ -84,6 +84,43 @@ body
     margin: auto;
     text-align: left;
     padding-bottom: 15px;
+}
+
+.column-container
+{
+    border-radius: 10px;
+    border: 1px solid white;
+    margin-right: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;  // So that .tie-popup can be positioned according to it
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s linear;  /* Adjust the 0.5s to whatever duration you want */
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+.tie-popup {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;  // It should be hidden by default
+opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
 }
 
 .back_to_lobby

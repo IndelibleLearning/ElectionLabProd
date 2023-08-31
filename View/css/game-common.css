@@ -90,6 +90,11 @@
     font-size: 20px;
 }
 
+.elo-button:disabled
+{
+    opacity: .5;
+}
+
 button.elo-button:hover
 {
     transform: scale(1.1, 1.05);
@@ -101,7 +106,7 @@ button.elo-button:hover
     color: darkblue;
 }
 
-.red .elo-button
+.red .  elo-button
 {
     background: #f06961;
     color: darkred;

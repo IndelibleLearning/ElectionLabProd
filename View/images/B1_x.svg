@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+<defs>
+	<style>
+		.cls-0{fill:#ffd55f;opacity:.75;}
+		.cls-1{fill:#397dbf; stroke:#232b64;}
+		.cls-1,.cls-2{stroke-miterlimit:20;}
+		.cls-2{fill:#fff;stroke:#232b64}
+	</style>
+</defs>
+<rect class="cls-1" x=".5" y=".5" width="50" height="50" rx="5.16" ry="5.16"/>
+	
+<polygon id="lose" class="cls-0" points="49.5 40.827 40.827 49.5 25.5 34.173 10.173 49.5 1.5 40.827 16.827 25.5 1.5 10.173 10.173 1.5 25.5 16.827 40.827 1.5 49.5 10.173 34.173 25.5 49.5 40.827"/>
+
+<circle class="cls-2" cx="25.5" cy="25.5" r="5.75"/>
+<circle class="cls-2" cx="25.5" cy="25.5" r="3"/>
+
+</svg>
