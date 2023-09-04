@@ -21,6 +21,12 @@ const CHECK_AUTO_MATCH_RATE = 5000;
 const EVENTS_GAME_MODE_ID = 2;
 const STANDARD_GAME_MODE_ID = 1;
 
+const FRESHNESS_THRESHOLDS = {
+    LESS_ACTIVE: 300, // 5 minutes
+    INACTIVE: 600      // 10 minutes
+};
+
+
 let autoMatchInterval = null;
 let eventsEnabled = false;
 let promptPlayerJoinGame = true;
@@ -148,12 +154,17 @@ function createPlayer(player, gameId)
 
     if (isHost())
     {
+        // show freshness
+        playerContainer.appendChild(createFreshnessDisplay(player.freshness));
+
         if (gameId)
         {
+            // kill button
             playerContainer.appendChild(createKillGameButton(gameId));
         }
         else
         {
+            // kick button
             playerContainer.appendChild(createKickPlayerButton(player.player_name));
         }
     }
@@ -164,6 +175,45 @@ function createPlayer(player, gameId)
     }
     return playerContainer;
 }
+
+function secondsToHMS(seconds) {
+    if (seconds === null) {
+        return "No Activity";
+    }
+
+    const absSeconds = Math.abs(seconds);
+    const dateObj = new Date(absSeconds * 1000);  // Convert seconds to milliseconds
+
+    const h = dateObj.getUTCHours();
+    const m = dateObj.getUTCMinutes();
+    const s = dateObj.getUTCSeconds();
+
+    return (seconds < 0 ? "-" : "") + `${h}h ${m}m ${s}s`;
+}
+
+function getFreshnessClass(freshness) {
+    if (freshness === null) {
+        return 'no-activity';
+    }
+
+    if (freshness > FRESHNESS_THRESHOLDS.INACTIVE) {
+        return 'inactive';
+    }
+
+    if (freshness > FRESHNESS_THRESHOLDS.LESS_ACTIVE) {
+        return 'less-active';
+    }
+
+    return 'active';
+}
+
+function createFreshnessDisplay(freshness) {
+    let freshnessDisplay = document.createElement("span");
+    freshnessDisplay.innerHTML = " [" + secondsToHMS(freshness) + "] ";
+    freshnessDisplay.className = getFreshnessClass(freshness);
+    return freshnessDisplay;
+}
+
 
 function createKillGameButton(gameId)
 {

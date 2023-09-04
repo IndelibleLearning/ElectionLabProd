@@ -6,12 +6,22 @@
 
     class PlayerModel extends Database
     {
-       
-        public function get_players_by_room($room_id)
-        {
-            $param_types = "s";
-            return $this->select("SELECT * FROM players where room_id = ?", $param_types, [$room_id]);
+
+        public function get_players_by_room($room_id) {
+            $param_types = "i";
+
+            $query = "
+                SELECT *, 
+                       TIMESTAMPDIFF(SECOND, expires_at, NOW()) AS freshness 
+                FROM players 
+                WHERE room_id = ? 
+                ORDER BY freshness DESC
+            ";
+
+            return $this->select($query, $param_types, [$room_id]);
         }
+
+
         
         public function get_player_in_room($room_id, $player_name)
         {
@@ -119,6 +129,26 @@
         {
             $param_types = "ii";
             return $this->update("UPDATE players SET color_id=? where id=?", $param_types, [$color_id, $player_id]);
+        }
+
+        public function set_freshness($player_id)
+        {
+            $param_types = "i";
+            return $this->update("UPDATE players SET expires_at=NOW() WHERE id=?", $param_types, [$player_id]);
+        }
+
+        public function get_freshness_difference($player_id)
+        {
+            $param_types = "i";
+            $query = "SELECT TIMESTAMPDIFF(SECOND, expires_at, NOW()) AS difference FROM players WHERE id=?";
+
+            $result = $this->select($query, $param_types, [$player_id]);
+
+            if ($result && count($result) > 0) {
+                return $result[0]['difference'];  // This returns the difference in seconds.
+            } else {
+                return false;  // Return false or any other error handling you prefer.
+            }
         }
 
         public function update_room($player_id, $room_id)

@@ -1,4 +1,5 @@
 import * as api_common from "./api_common.js";
+import {UPDATE_PLAYER_FRESHNESS_BASE} from "./user_common.js";
 
 export const TURN_NUM_KEY = "indl_elo_turn_num";
 export const PLAYER_FINISHED_GAME = "indl_elo_finished_game";
@@ -41,6 +42,7 @@ export function deploy_event(eventName, eloParams)
 {
     //const event = new Event(event_name);
     //elem.dispatchEvent(event);
+    updateFreshness();
     
     const custEvent = new CustomEvent(eventName, {
       bubbles: true
@@ -48,6 +50,22 @@ export function deploy_event(eventName, eloParams)
     custEvent.eloParams = eloParams;
     
     document.dispatchEvent(custEvent);
+}
+
+function updateFreshness()
+{
+    console.log("Updating freshness");
+    let room_code = document.querySelector(ROOM_CODE_INPUT_ID).value;
+    let player_name = document.querySelector(PLAYER_NAME_INPUT_ID).value;
+    const url =  UPDATE_PLAYER_FRESHNESS_BASE + room_code + "&player_name=" + player_name;
+    get_request(url)
+    .then(res=>{
+        if (res.has_errors){
+            console.log(res.error_msg);
+            return;
+        }
+        console.log("Freshness updated");
+    });
 }
 
 export function show_turn_number()

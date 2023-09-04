@@ -78,3 +78,18 @@
     font-weight: bold;
 }
 
+.no-activity,
+.inactive
+{
+    color: red;
+}
+
+.less-active
+{
+    color: yellow;
+}
+
+.active
+{
+    color: green;
+}

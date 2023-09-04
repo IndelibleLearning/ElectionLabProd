@@ -17,6 +17,8 @@ export const KILL_GAME_BASE = `${api_common.API_URL_BASE}/kill_game.php?game_id=
 
 export const KICK_PLAYER_BASE = `${api_common.API_URL_BASE}/kick_player.php?room_code=`
 
+export const UPDATE_PLAYER_FRESHNESS_BASE = `${api_common.API_URL_BASE}/update_player_freshness.php?room_code=`
+
 // Views URL
 export const DASHBOARD_URL = `${api_common.VIEW_URL_BASE}/user_dashboard.php`
 const ROOM_URL_BASE = `${api_common.VIEW_URL_BASE}/player_list_view.php`;
