@@ -2,6 +2,9 @@ import * as request from "./request.js";
 import * as user_common from "./user_common.js";
 import * as player_common from "./player_common.js";
 import * as api_common from "./api_common.js";
+import * as game_common from "./game_common.js";
+import {UPDATE_PLAYER_FRESHNESS_BASE} from "./user_common.js";
+import {get_request, PLAYER_NAME_INPUT_ID, ROOM_CODE_INPUT_ID} from "./game_common.js";
 
 const matchedPlayerList = document.querySelector("#matched_player_list");
 const unmatchedPlayerList = document.querySelector("#unmatched_player_list");
@@ -13,9 +16,11 @@ const eventModeButton = document.querySelector("#event_mode_button");
 const joinGameButton = document.querySelector("#join_game_button");
 const newGameButton = document.querySelector("#new_game_button");
 const joinUrl = document.querySelector("#join-link");
+const stillWaitingPrompt = document.querySelector("#still-waiting-prompt");
 let room_code = "";
 
 const CHECK_MATCH_RATE_MS = 1000;
+const CHECK_STILL_WAITING_MS = 1000 * 30;
 const LOAD_PLAYERS_RATE_MS = 1000;
 const CHECK_AUTO_MATCH_RATE = 5000;
 const EVENTS_GAME_MODE_ID = 2;
@@ -30,6 +35,7 @@ const FRESHNESS_THRESHOLDS = {
 let autoMatchInterval = null;
 let eventsEnabled = false;
 let promptPlayerJoinGame = true;
+let stillWaitingTimeout = null;
 
 function setup()
 {
@@ -46,7 +52,8 @@ function setup()
     setupCheckForGame();
     loadPlayers();
     setupMatchButton();
-    setupEventModeButton();
+    setupEventModeButton()
+    setupStillWaiting();
 }
 setup();
 
@@ -106,10 +113,52 @@ function checkGameStarted(player_name)
         else
         {
             resetPlayer();
+            setupCheckStillThere();
         }
 
         
         setTimeout(checkGameStarted, CHECK_MATCH_RATE_MS, player_name);
+    });
+}
+
+function setupCheckStillThere()
+{
+    if(stillWaitingTimeout != null)
+    {
+        return;
+    }
+
+    stillWaitingTimeout = setTimeout(checkPlayerStillWaiting, CHECK_STILL_WAITING_MS);
+}
+
+function checkPlayerStillWaiting()
+{
+    showStillWaitingPrompt();
+}
+
+function showStillWaitingPrompt()
+{
+    game_common.show(stillWaitingPrompt);
+}
+
+function setupStillWaiting()
+{
+    let stillThereButton = document.querySelector("#still-there-confirm");
+    stillThereButton.addEventListener("click", () => {
+        game_common.hide(stillWaitingPrompt);
+        stillWaitingTimeout = null;
+
+        const player_name = player_common.getPlayerName();
+
+        const url =  UPDATE_PLAYER_FRESHNESS_BASE + room_code + "&player_name=" + player_name;
+        get_request(url)
+        .then(res=>{
+            if (res.has_errors){
+                console.log(res.error_msg);
+                return;
+            }
+        });
+
     });
 }
 

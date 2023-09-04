@@ -14,6 +14,17 @@
       <div class="main-bg">
         <div class="mask d-flex align-items-center">
           <div class="container">
+
+            <div id="still-waiting-prompt" class="still-waiting-prompt hidden">
+              <div id="still-waiting" class="still-waiting hidden">
+                <div class="still-waiting-container">
+                    <h1>Are you still there?</h1>
+                    <div>
+                        <button id="still-there-confirm">Yes</button>
+                    </div>
+                </div>
+            </div>
+            </div>
             <div class="row justify-content-center">
               <div class="col-12 col-md-10 col-lg-7 col-xl-6">
                   <h1 class="title">Room Code: <span id="title_room_code"></span></h1>

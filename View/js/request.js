@@ -12,7 +12,7 @@ export function get(url)
 	})
    .then(response => response.json())
     .catch((error) => {
-      alert('Error: ', error);
+      console.log('Error: ', error);
     });
 }
 
@@ -35,7 +35,7 @@ export function post(url, data)
        return res;
    })
     .catch((error) => {
-      alert('Error: ', error);
+      console.log('Error: ', error);
     });
 }
 

@@ -35,6 +35,7 @@
     foreach ($players as $player)
     {
         $player_id = $player["id"];
+        $player_model->set_freshness($player_id);
         $player_model->leave_game($player_id);
     }
 
