@@ -146,9 +146,16 @@ function createPlayer(player, gameId)
     let playerContainer = document.createElement("div");
     playerContainer.innerHTML = player.player_name;
 
-    if (isHost() && gameId)
+    if (isHost())
     {
-        playerContainer.appendChild(createKillGameButton(gameId));
+        if (gameId)
+        {
+            playerContainer.appendChild(createKillGameButton(gameId));
+        }
+        else
+        {
+            playerContainer.appendChild(createKickPlayerButton(player.player_name));
+        }
     }
     
     if (player.player_name == player_common.getPlayerName())
@@ -170,6 +177,18 @@ function createKillGameButton(gameId)
     return button;
 }
 
+function createKickPlayerButton(playerName)
+{
+    let button = document.createElement("button");
+    button.innerHTML = "Kick";
+    button.addEventListener("click", event => {
+        console.log("Kicking " + playerName);
+        kickPlayer(playerName);
+        event.target.setAttribute("disabled", "true");
+    });
+    return button;
+}
+
 function killGame(gameId)
 {
     let url = user_common.KILL_GAME_BASE + gameId;
@@ -182,6 +201,22 @@ function killGame(gameId)
             }
 
             console.log("killed game " + gameId);
+
+        });
+}
+
+function kickPlayer(playerName)
+{
+    let url = user_common.KICK_PLAYER_BASE + room_code + "&player_name=" + playerName;
+    request.get(url)
+        .then(res => {
+            if (res.has_errors)
+            {
+                console.log(res.err_msg);
+                return;
+            }
+
+            console.log("kicked player " + playerName);
 
         });
 }

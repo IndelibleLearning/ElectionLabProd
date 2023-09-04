@@ -120,7 +120,17 @@
             $param_types = "ii";
             return $this->update("UPDATE players SET color_id=? where id=?", $param_types, [$color_id, $player_id]);
         }
-        
+
+        public function update_room($player_id, $room_id)
+        {
+            $param_types = "ii";
+            try {
+                return $this->update("UPDATE players SET room_id=? where id=?", $param_types, [$room_id, $player_id]);
+            } catch (Exception $e) {
+                return $e;
+            }
+        }
+
         public function leave_game($player_id)
         {
             $param_types = "i";
