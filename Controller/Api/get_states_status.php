@@ -157,7 +157,7 @@
 
         $entry = [];
         $entry["state_abbrev"] = $state["state_abbrev"];
-        $entry["electoral_votes"] = $state_ev["electoral_votes"];
+        $entry["electoral_votes"] = $state_EV["electoral_votes"];
         $entry["winner_id"] = -1;
         $entry["winner_name"] = "";
         $entry["color_id"] = "white";

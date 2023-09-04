@@ -62,6 +62,8 @@ function setupRollEventListener()
 
 function startRoll()
 {
+    showLoserAnimation = true;
+    nextButton.disabled = false;
     winner_color = null;
     state_abbrev = null;
     state_EVs = null;

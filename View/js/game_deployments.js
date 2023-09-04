@@ -21,6 +21,7 @@ function setupDeployment()
 {
     setupDeploymentEventListener();
     setupSubmit();
+    setupSliders();
 }
 setupDeployment();
 
@@ -75,83 +76,110 @@ function setupSubmit() {
             }
             else
             {
-                alert(data.err_msg);
+                console.log(data.err_msg);
                 submitButton.removeAttribute("disabled");
             }
         })
         .catch((error) => {
-          alert('Error:', error);
+            console.log('Error:', error);
         });
     });
 }
 
-function deployPieces(elem_ID) {
-  var x = document.getElementById(elem_ID);
-  document.getElementById("demo").innerHTML = "You selected: "+ elem_ID + " " + x.value;
+function setupSliders()
+{
+    // 1. Grab the input values
+    let room_code = document.querySelector(common.ROOM_CODE_INPUT_ID).value;
+    let game_id = document.querySelector(common.GAME_ID_INPUT_ID).value;
+    let player_name = document.querySelector(common.PLAYER_NAME_INPUT_ID).value;
+
+    // 2. Use Fetch API to call your PHP script
+    let url = `${api_common.API_URL_BASE}/get_unwon_states.php?room_code=${room_code}&game_id=${game_id}&player_name=${player_name}`;
+    common.get_request(url)
+    .then(res=>{
+        if (res.has_errors){
+            console.log(res.error_msg);
+            return;
+        }
+
+        generateStateSliders(res.data);
+    });
+}
+
+function generateStateSliders(states) {
+    let list = document.querySelector("#input-state-deployments");
+    list.innerHTML = ''; // Clear the current list
+    states.forEach(state => {
+        console.log(state);
+        let li = document.createElement("li");
+
+        let input = document.createElement("input");
+        input.type = "range";
+        input.className = "state-slider";
+        input.orient = "vertical";
+        input.min = "0";
+        input.max = "5";
+        input.step = "1";
+        input.value = "0";
+        input.id = `${state.state_abbrev}_pieces`;
+        input.setAttribute("data-abbrev", state.state_abbrev);
+
+        let label = document.createElement("label");
+        label.htmlFor = input.id;
+        label.className = "state-slider-label";
+        label.innerText = `${state.state_abbrev} (${state.electoral_votes})`;
+
+        let div = document.createElement("div");
+        div.id = `d${state.state_abbrev}`;
+        div.className = "state-pip-display";
+        div.innerText = "0";
+
+        li.appendChild(input);
+        li.appendChild(label);
+        li.appendChild(div);
+
+        list.appendChild(li);
+    });
 }
 
 var list = document.querySelector("#input-state-deployments");
 list.addEventListener("change", function(e){
 	if(e.target.className == "state-slider"){
-		var li = e.target.parentElement;
 		update_deployment_data();
 	}
 })
 
 function update_deployment_data() {
     piecesUsed = 0;
-    
-	let dNV = document.getElementById("NV_pieces").value;
-	let dAZ = document.getElementById("AZ_pieces").value;
-	let dCO = document.getElementById("CO_pieces").value;
-	let dMN = document.getElementById("MN_pieces").value;
-	let dWI = document.getElementById("WI_pieces").value;
-	let dMI = document.getElementById("MI_pieces").value;
-	let dFL = document.getElementById("FL_pieces").value;
-	let dGA = document.getElementById("GA_pieces").value;
-	let dNC = document.getElementById("NC_pieces").value;
-	let dVA = document.getElementById("VA_pieces").value;
-	let dPA = document.getElementById("PA_pieces").value;
-	let dNH = document.getElementById("NH_pieces").value;
-	
-	document.getElementById("dNV").innerText = dNV;
-	document.getElementById("dAZ").innerText = dAZ;
-	document.getElementById("dCO").innerText = dCO;
-	document.getElementById("dMN").innerText = dMN;
-	document.getElementById("dWI").innerText = dWI;
-	document.getElementById("dMI").innerText = dMI;
-	document.getElementById("dFL").innerText = dFL;
-	document.getElementById("dGA").innerText = dGA;
-	document.getElementById("dNC").innerText = dNC;
-	document.getElementById("dVA").innerText = dVA;
-	document.getElementById("dAZ").innerText = dAZ;
-	document.getElementById("dPA").innerText = dPA;
-	document.getElementById("dNH").innerText = dNH;
-	
-	let state_input_list = document.querySelectorAll("#input-state-deployments li input");
-	
-	state_input_list.forEach((state_input) => {
-	    state_deployments[state_input.getAttribute("data-abbrev")] = state_input.value;
-	    
-	    piecesUsed += parseInt(state_input.value);
-	});
-	
-	let totalPiecesDiv = document.querySelector(TOTAL_PIECES_ID);
-	totalPiecesDiv.innerHTML = DEPLOYMENT_PIECES_MAX - piecesUsed;
-	
-	if (piecesUsed > DEPLOYMENT_PIECES_MAX)
-	{
-	    totalPiecesDiv.style = "color: red";
-	}
-	else if (piecesUsed === DEPLOYMENT_PIECES_MAX)
-	{
-	    totalPiecesDiv.style = "color: green";
-	}
-	else
-	{
-	    totalPiecesDiv.style = "color: black";
-	}
+    let state_input_list = document.querySelectorAll("#input-state-deployments li input");
+
+    state_input_list.forEach((state_input) => {
+        let stateAbbrev = state_input.getAttribute("data-abbrev");
+        let stateValue = state_input.value;
+        state_deployments[stateAbbrev] = stateValue;
+
+        let displayElement = document.getElementById(`d${stateAbbrev}`);
+        displayElement.innerText = stateValue;
+
+        piecesUsed += parseInt(stateValue);
+    });
+
+    updateTotalPiecesDisplay(piecesUsed);
 }
+
+function updateTotalPiecesDisplay(piecesUsed) {
+    let totalPiecesDiv = document.querySelector(TOTAL_PIECES_ID);
+    totalPiecesDiv.innerHTML = DEPLOYMENT_PIECES_MAX - piecesUsed;
+
+    if (piecesUsed > DEPLOYMENT_PIECES_MAX) {
+        totalPiecesDiv.style = "color: red";
+    } else if (piecesUsed === DEPLOYMENT_PIECES_MAX) {
+        totalPiecesDiv.style = "color: green";
+    } else {
+        totalPiecesDiv.style = "color: black";
+    }
+}
+
 
 function format_states_for_api() 
 {
@@ -202,11 +230,11 @@ function checkAlreadyDeployed()
         }
         else
         {
-            alert(data.err_msg);
+            console.log(data.err_msg);
         }
     })
     .catch((error) => {
-      alert('Error:', error);
+        console.log('Error:', error);
     });
 }
 
@@ -245,11 +273,11 @@ function checkOtherPlayerDeployed()
         }
         else
         {
-            alert(data.err_msg);
+            console.log(data.err_msg);
         }
     })
     .catch((error) => {
-      alert('Error:', error);
+        console.log('Error:', error);
     });
 }
 

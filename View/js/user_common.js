@@ -52,5 +52,5 @@ export function goToLogin()
 
 export function matchPlayersUrl($room_code, game_mode)
 {
-    return MATCH_PLAYERS_BASE + "?room_code=" + $room_code + "&election_year=2020&game_mode=" + game_mode;
+    return MATCH_PLAYERS_BASE + "?room_code=" + $room_code + "&election_year=2024&game_mode=" + game_mode;
 }
