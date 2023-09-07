@@ -22,7 +22,7 @@ const BLUE_SCORE = "#blue_score";
 const BAR_FILL_SUFFIX = " .bar-fill";
 const PIPS_CONTAINER = "deployments";
 const PIPS_CONTAINER_SUFFIX = "_pips";
-const PIPS_CLASS = "pip_r";
+const PIPS_CLASS = "pip_b";
 
 const PIPS_BLUE_CLASS = "blue_pips";
 const PIPS_RED_CLASS = "red_pips"

@@ -43,7 +43,7 @@
 	        <? include 'game_wait_view.php'; ?>
             <div class="map-image-container">
               <?php
-                include 'map_image.php';
+                include 'maps/map_image_2024.php';
               ?> 
             </div>
             <div class="cards-area">
