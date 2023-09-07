@@ -8,6 +8,7 @@ export const ROOM_CODE_INPUT_ID = "#room_code";
 export const PLAYER_NAME_INPUT_ID = "#player_name";
 export const GAME_ID_INPUT_ID = "#game_id";
 
+
 export const START_EVENT = "start";
 export const MAP_UPDATE_EVENT = "map_update";
 export const DEPLOYMENT_EVENT = "deployment";
@@ -38,12 +39,14 @@ let isDebouncing = false;
 let local_state_color_map = {};
 let local_player_score_map = {};
 
+export const CHECK_GAME_RUNNING_BASE = `${api_common.API_URL_BASE}/check_game_still_running.php?room_code=`
+
 export function deploy_event(eventName, eloParams)
 {
     //const event = new Event(event_name);
     //elem.dispatchEvent(event);
     updateFreshness();
-    
+
     const custEvent = new CustomEvent(eventName, {
       bubbles: true
     });

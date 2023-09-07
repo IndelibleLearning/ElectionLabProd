@@ -30,7 +30,6 @@
     }
     $players = $player_response->get_data();
 
-    // check if all players have deployments
     $all_players_deployed = true;
     foreach ($players as $player)
     {

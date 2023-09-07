@@ -2,5 +2,3 @@
 
 <div id="game-confirm" class="game-confirm elo-button hidden">
 </div>
-    
-    

@@ -1,5 +1,6 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import {get_request, getRoomUrl, show} from "./game_common.js";
 
 // game details keys
 const ROOM_CODE_KEY = "indl_elo_room_code";
@@ -18,11 +19,17 @@ const GAME_ID_BUTTON_ID = "#save_game_id";
 const START_GAME_BUTTON_ID = "#start_game";
 const BACK_TO_LOBBY_ID = "#back_to_lobby";
 
+const GAME_TERMINATED_MODAL = "#game-terminated";
+const GAME_TERMINATED_BUTTON = "#game-terminated-button";
+
+const CHECK_STILL_RUNNING_PERIOD = 1000;
+
 function setup()
 {
     setupGameDetailsInputs();
     setupStartGameButton();
     setupBackToRoomButton();
+    setupCheckGameStillRunning();
     common.deploy_event(common.UPDATE_MAP_EVENT);
     startGame();
 }
@@ -126,5 +133,46 @@ function setupBackToRoomButton()
         if (confirm("Are you sure you want to leave the game?")) {
             window.location = common.getRoomUrl(room_code);
         }
+    });
+}
+
+function setupCheckGameStillRunning()
+{
+    verifyGameStillRunning();
+}
+
+function verifyGameStillRunning()
+{
+    let room_code = document.querySelector(ROOM_CODE_INPUT_ID).value;
+    let player_name = document.querySelector(PLAYER_NAME_INPUT_ID).value;
+    let game_id = document.querySelector(GAME_ID_INPUT_ID).value;
+    const url =  common.CHECK_GAME_RUNNING_BASE + room_code + "&player_name=" + player_name + "&game_id=" + game_id;
+    get_request(url)
+        .then(res=>{
+            setTimeout(verifyGameStillRunning, CHECK_STILL_RUNNING_PERIOD);
+            if (res.has_errors){
+                console.log(res.error_msg);
+                return;
+            }
+            if (!res.data)
+            {
+                showGameTerminated();
+            }
+        });
+}
+
+function showGameTerminated()
+{
+    let modal = document.querySelector(GAME_TERMINATED_MODAL);
+    setupTerminatedButton();
+    common.show(modal);
+}
+
+function setupTerminatedButton()
+{
+    let terminatedButton = document.querySelector(GAME_TERMINATED_BUTTON);
+    terminatedButton.addEventListener("click", () => {
+        const room_code = document.querySelector("#room_code").value;
+        window.location = common.getRoomUrl(room_code);
     });
 }

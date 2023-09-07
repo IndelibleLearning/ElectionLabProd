@@ -38,6 +38,16 @@
 		  </div>
 	  </div>
 
+
+      <div id="game-terminated" class="game-terminated hidden">
+          <div class="game-terminated-container">
+              <div class="game-terminated-modal">
+                  <h1>Game has been ended</h1>
+                  <button id="game-terminated-button">Return to lobby</button>
+              </div>
+          </div>
+      </div>
+
 	  <?php
          include 'game_common_view.php';
          include 'game_finish_view.php';
