@@ -14,4 +14,17 @@
             Submit
         </button> 
     </div>
+
+    <div id="show-color-modal" class="hidden show-color-modal">
+        <div id="player-color-message" class="show-color-message"></div>
+        <div class="buttons-area">
+            <button id="show-tutorial-button" class="elo-button">Tutorial</button>
+            <button id="dismiss-color-modal-button" class="elo-button">Dismiss</button>
+        </div>
+    </div>
   </div>
+
+
+<button id="hide-deployments-button" class="hidden hide-deployments-button elo-button">
+    Hide
+</button>

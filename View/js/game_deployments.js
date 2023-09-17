@@ -1,5 +1,6 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import * as game_tutorials from "./game_tutorials.js"
 
 const TOTAL_PIECES_ID = "#total_pieces";
 
@@ -9,6 +10,13 @@ const NEXT_AREA_ID = "#create_turn_area";
 const CHECK_OTHER_DEPLOY_RATE = 2000;
 
 const deploymentsWaitingArea = document.querySelector("#waiting_depoyments_area");
+const hideDeploymentsButton = document.querySelector("#hide-deployments-button");
+
+// tutorial
+const colorModal = document.querySelector("#show-color-modal");
+const dismissColorModalButton = document.querySelector("#dismiss-color-modal-button");
+const colorMessage = document.querySelector("#player-color-message");
+const showTutorialButton = document.querySelector("#show-tutorial-button");
 
 // deployment pieces
 const DEPLOYMENT_PIECES_MAX = 24;
@@ -20,6 +28,7 @@ let state_deployments = {};
 function setupDeployment()
 {
     setupDeploymentEventListener();
+    setupHideDeploymentButton();
     setupSubmit();
     setupSliders();
 }
@@ -30,11 +39,57 @@ function setupDeploymentEventListener()
     let deploymentArea = document.querySelector(DEPLOYMENTS_AREA_ID);
     document.addEventListener(common.DEPLOYMENT_EVENT, function(event)
     {
-        deploymentArea.classList.remove("hidden");
+        common.show(deploymentArea);
+        //common.show(hideDeploymentsButton);
+        setupColorModal();
+        common.show(colorModal);
         checkAlreadyDeployed();
     });
 }
 
+function setupColorModal()
+{
+    setColorMessage();
+    dismissColorModalButton.addEventListener("click", () =>
+    {
+        common.hide(colorModal);
+        common.show(hideDeploymentsButton);
+        showDeployPiecesArea();
+    });
+    showTutorialButton.addEventListener("click", game_tutorials.showTutorial);
+    common.show(colorModal);
+}
+
+function setColorMessage()
+{
+    const color = common.getPlayerColor();
+    if (color)
+    {
+        colorMessage.innerHTML = `You are ${color}!`;
+    }
+    else
+    {
+        setTimeout(setColorMessage, 200);
+    }
+
+}
+
+function setupHideDeploymentButton()
+{
+    let deploymentArea = document.querySelector(DEPLOYMENTS_AREA_ID);
+    hideDeploymentsButton.addEventListener("click", () => {
+        if (common.isHidden(deploymentArea))
+        {
+            common.show(deploymentArea);
+            hideDeploymentsButton.innerHTML = "Hide";
+        }
+        else
+        {
+            common.hide(deploymentArea);
+            hideDeploymentsButton.innerHTML = "Deployments";
+        }
+    });
+}
 function setupSubmit() {
     var submitButton = document.querySelector("#submit_deployments");
     submitButton.addEventListener("click", function(e){
@@ -88,12 +143,10 @@ function setupSubmit() {
 
 function setupSliders()
 {
-    // 1. Grab the input values
     let room_code = document.querySelector(common.ROOM_CODE_INPUT_ID).value;
     let game_id = document.querySelector(common.GAME_ID_INPUT_ID).value;
     let player_name = document.querySelector(common.PLAYER_NAME_INPUT_ID).value;
 
-    // 2. Use Fetch API to call your PHP script
     let url = `${api_common.API_URL_BASE}/get_unwon_states.php?room_code=${room_code}&game_id=${game_id}&player_name=${player_name}`;
     common.get_request(url)
     .then(res=>{
@@ -108,7 +161,12 @@ function setupSliders()
 
 function generateStateSliders(states) {
     let list = document.querySelector("#input-state-deployments");
-    list.innerHTML = ''; // Clear the current list
+    list.innerHTML = '';
+
+    states.sort(function(a, b) {
+        return b.electoral_votes - a.electoral_votes;
+    });
+
     states.forEach(state => {
         console.log(state);
         let li = document.createElement("li");
@@ -222,10 +280,6 @@ function checkAlreadyDeployed()
             if (data.data === true)
             {
                 checkOtherPlayerDeployed();
-            } 
-            else
-            {
-                showDeployPiecesArea();
             }
         }
         else

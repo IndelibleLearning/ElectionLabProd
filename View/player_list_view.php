@@ -16,7 +16,7 @@
           <div class="container">
 
             <div id="still-waiting-prompt" class="still-waiting-prompt hidden">
-              <div id="still-waiting" class="still-waiting hidden">
+              <div id="still-waiting" class="still-waiting">
                 <div class="still-waiting-container">
                     <h1>Are you still there?</h1>
                     <div>
@@ -76,6 +76,7 @@
         </div>
       </div>
     </section>
+    <? include 'modal.php'; ?>
     <script type="module" src="js/player_list_view.js"></script>
  </body>
 </html>

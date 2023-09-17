@@ -6,6 +6,16 @@
     padding-top: 0;
 }
 
+.show-color-modal
+{
+    padding: 50px 0;
+}
+
+.show-color-message
+{
+    font-size: 75px;
+}
+
 .deployments-title.elo-header
 {
     font-size: 53px;
@@ -15,6 +25,13 @@
 {
     list-style-type: none;
     padding: 0;
+}
+
+.hide-deployments-button
+{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
 .resource-num
@@ -99,17 +116,19 @@ input.state-slider::-moz-range-thumb {
 {
     padding-top: 15px;
     position: absolute;
-    bottom: 0;
+    bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 20px;
 }
 
 .state-pip-display
 {
     position: absolute;
-    top: 0;
+    top: -5px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 22px;
 }
 
 
@@ -122,14 +141,14 @@ input.state-slider::-moz-range-thumb {
   .input-state-deployments li
   {
       height: 230px;
-      width: 10px;
+      width: 21px;
   }
   
   input.state-slider
   {
       width: 150px;
       height: 10px;
-      left: 8px;
+      left: 11px;
   }
   input.state-slider::-webkit-slider-thumb {
       width: 15px;

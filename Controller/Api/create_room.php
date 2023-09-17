@@ -64,7 +64,7 @@
     echo ApiResponse::success_data($results)->get_json();
     
     
-    function generateRandomString($length = 6) {
+    function generateRandomString($length = 3) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';

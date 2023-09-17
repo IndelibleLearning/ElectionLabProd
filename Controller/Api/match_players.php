@@ -58,27 +58,50 @@
     
     // randomize players
     shuffle($unmatched_players);
+
+    $debug_list = [];
     
     // starting matching players
     for($i=0; $i < count($unmatched_players) - 1; $i+=2)
     {
         $red_player = $unmatched_players[$i];
         $blue_player = $unmatched_players[$i + 1];
-        
+
         // try and create the game
         $create_game_url = CONTROLLER_API_PATH . "create_game.php?room_code=$room_code&election_year=$election_year&game_mode=$game_mode";
         $created_game_id = RestHelper::rest_call($create_game_url)["data"]["game_id"];
-        
+
+        $debug_info = [];
+        $debug_info["red_player"] = $red_player["player_name"];
+        $debug_info["blue_player"] = $blue_player["player_name"];
+        $debug_info["game_id"] = $created_game_id;
+        array_push($debug_list, $debug_info);
+
         join_game($red_player, "red", $created_game_id, $room_code);
         join_game($blue_player, "blue", $created_game_id, $room_code);
     }
     
-    echo ApiResponse::success()->get_json();
+    echo ApiResponse::success_data($debug_list)->get_json();
     
     
 
     function join_game($player, $color_name, $game_id, $room_code)
     {
+        $player_model = new PlayerModel();
+        $player_response = $player_model->validate_player_by_id($player["id"]);
+        if ($player_response->get_has_errors())
+        {
+            echo $player_response->get_json_error();
+            die();
+        }
+        $game_id_check = $player_response->get_data()["game_id"];
+
+        if($game_id_check != null)
+        {
+            echo ApiResponse::error("player_has_game", "Player already has game " + $game_id_check)->get_json_error();
+            die();
+        }
+
         /// set player color
         $player_id = $player["id"];
         $color_url = CONTROLLER_API_PATH . "set_player_color.php?player_id=$player_id&color_name=$color_name";

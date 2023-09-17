@@ -38,7 +38,6 @@
 		  </div>
 	  </div>
 
-
       <div id="game-terminated" class="game-terminated hidden">
           <div class="game-terminated-container">
               <div class="game-terminated-modal">
@@ -50,9 +49,11 @@
 
 	  <?php
          include 'game_common_view.php';
+         include 'modal.php';
          include 'game_finish_view.php';
          include 'game_postgame_view.php';
          include 'game_map_view.php';
+         include 'tutorials/game_tutorials.php'
       ?> 
       
       <!-- HAND -->
@@ -67,7 +68,7 @@
         include 'game_roll_view.php';
         include 'effect_views/effect_plus_view.php';
         include 'effect_views/effect_shift_view.php';
-      ?> 
+      ?>
 
 	  <script src="js/jquery-3.4.1.min.js"></script>
 	  <script src="js/popper.min.js"></script>
@@ -83,6 +84,7 @@
 	  <script type="module" src="js/game_finish.js"></script>
 	  <script type="module" src="js/game_postgame.js"></script>
 	  <script type="module" src="js/refresh_hand.js"></script>
-	  
+      <script type="module" src="js/modal.js"></script>
+
   </body>
 </html>

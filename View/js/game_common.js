@@ -170,6 +170,26 @@ export function show(element)
     element.classList.remove("hidden");
 }
 
+export function isHidden(element)
+{
+    return element.classList.contains("hidden");
+}
+
+export function getPlayerColor()
+{
+    const mainClass = document.querySelector("#main").classList;
+
+    if (mainClass.contains("blue"))
+    {
+        return "blue";
+    } else if (mainClass.contains("red"))
+    {
+        return "red";
+    } else
+    {
+        return null;
+    }
+}
 
 export function refresh_event_cards()
 {

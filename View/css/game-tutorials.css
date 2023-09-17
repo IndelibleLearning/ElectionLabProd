@@ -1,0 +1,120 @@
+.game-tutorials
+{
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(.5,.5,.5,.5);
+}
+
+.game-tutorials .tab-links
+{
+    height: 55px;
+}
+
+.game-tutorials .tab-link.elo-button
+{
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.game-tutorials .tab-link.elo-button.current-tab
+{
+    background: white;
+}
+
+.game-tutorials-container.elo-action-screen
+{
+    width: 400px;
+}
+
+.close-tutorials
+{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.tutorial-dialogue
+{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tutorial-dialogue .image-section,
+.tutorial-dialogue .navigation-section,
+.tutorial-dialogue .text-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial-dialogue .image-section
+{
+    position: relative;
+    height: 60%
+}
+
+.tutorial-dialogue .image-section img
+{
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.tutorial-dialogue .navigation-section
+{
+    padding-top: 20px;
+    height: 10%;
+}
+
+.tutorial-dialogue .text-section
+{
+    width: 75%;
+    color: white;
+    height: 20%;
+}
+
+.tutorial-dialogue .text-section p
+{
+    height: 100%;
+}
+
+.tutorial-dialogue .breadcrumb
+{
+    padding: 8px;
+    margin-right: 5px;
+}
+
+.blue .tutorial-dialogue .breadcrumb.current
+{
+    background: #698DC5;
+}
+
+.red .tutorial-dialogue .breadcrumb.current
+{
+    background: #f06961;
+}
+
+.previous-button
+{
+    position: absolute;
+    left: -70px;
+    top:50%;
+}
+
+.next-button
+{
+    position: absolute;
+    right: -50px;
+    top: 50%;
+}

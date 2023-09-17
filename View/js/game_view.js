@@ -1,6 +1,9 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import * as player_common from "./player_common.js";
 import {get_request, getRoomUrl, show} from "./game_common.js";
+import {customConfirm} from "./modal.js";
+import * as game_tutorials from "./game_tutorials.js";
 
 // game details keys
 const ROOM_CODE_KEY = "indl_elo_room_code";
@@ -26,6 +29,8 @@ const CHECK_STILL_RUNNING_PERIOD = 1000;
 
 function setup()
 {
+    setupGameId();
+    setupTutorials();
     setupGameDetailsInputs();
     setupStartGameButton();
     setupBackToRoomButton();
@@ -34,6 +39,15 @@ function setup()
     startGame();
 }
 setup();
+
+function setupGameId()
+{
+    // this has special case because we seem to have problems with this?
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameId = urlParams.get('gameId');
+    player_common.setPlayerGameId(gameId);
+    console.log("setting game id to " + gameId);
+}
 
 function setupGameDetailsInputs()
 {
@@ -59,6 +73,11 @@ function setupGameDetail(buttonId, inputId, saveKey)
     button.addEventListener("click", function(e){
         window.localStorage.setItem(saveKey, input.value);
     });
+}
+
+function setupTutorials()
+{
+    game_tutorials.setupTutorials();
 }
 
 function setupStartGameButton()
@@ -130,9 +149,12 @@ function setupBackToRoomButton()
     const backToRoom = document.querySelector(BACK_TO_LOBBY_ID);
     backToRoom.addEventListener("click", event => 
     {
-        if (confirm("Are you sure you want to leave the game?")) {
-            window.location = common.getRoomUrl(room_code);
-        }
+        customConfirm("Are you sure you want to leave the game?", (userClickYes) => {
+            if (userClickYes)
+            {
+                window.location = common.getRoomUrl(room_code);
+            }
+        });
     });
 }
 

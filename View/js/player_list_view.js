@@ -5,6 +5,7 @@ import * as api_common from "./api_common.js";
 import * as game_common from "./game_common.js";
 import {UPDATE_PLAYER_FRESHNESS_BASE} from "./user_common.js";
 import {get_request, PLAYER_NAME_INPUT_ID, ROOM_CODE_INPUT_ID} from "./game_common.js";
+import * as modal from "./modal.js";
 
 const matchedPlayerList = document.querySelector("#matched_player_list");
 const unmatchedPlayerList = document.querySelector("#unmatched_player_list");
@@ -32,7 +33,7 @@ const FRESHNESS_THRESHOLDS = {
 };
 
 
-let autoMatchInterval = null;
+let autoMatchTimeout = null;
 let eventsEnabled = false;
 let promptPlayerJoinGame = true;
 let stillWaitingTimeout = null;
@@ -54,6 +55,7 @@ function setup()
     setupMatchButton();
     setupEventModeButton()
     setupStillWaiting();
+
 }
 setup();
 
@@ -103,6 +105,7 @@ function checkGameStarted(player_name)
         
         if (res.data && res.data.game_id)
         {
+            player_common.setPlayerGameId(res.data.game_id);
             // we have a game so start the prompt
             if (promptPlayerJoinGame)
             {
@@ -349,27 +352,31 @@ function setupMatchButton()
 function setupAutoMatch()
 {
     autoMatch();
-    autoMatchInterval = setInterval(autoMatch, CHECK_AUTO_MATCH_RATE)
+    //autoMatchInterval = setInterval(autoMatch, CHECK_AUTO_MATCH_RATE)
 }
 
 function clearAutoMatch()
 {
-    clearInterval(autoMatchInterval);
-    autoMatchInterval = null;
+    clearTimeout(autoMatchTimeout);
+    autoMatchTimeout = null;
 }
 
 function autoMatch()
 {
+    console.log("Running automatch at " + new Date().toLocaleTimeString());
     let gameMode = eventsEnabled ? EVENTS_GAME_MODE_ID : STANDARD_GAME_MODE_ID;
     let url = user_common.matchPlayersUrl(room_code, gameMode);
     request.get(url)
     .then(res => {
         matchPlayersButton.removeAttribute("disabled");
+        autoMatchTimeout = setTimeout(autoMatch, CHECK_AUTO_MATCH_RATE);
         if (res.has_errors)
         {
             console.log(res.err_msg);
             return;
         }
+
+        console.log(res.data);
         
         //alert("Matches created!");
         //loadPlayers();
@@ -379,14 +386,19 @@ function autoMatch()
 function promptJoinGame(gameId)
 {
     player_common.setPlayerGameId(gameId);
-    if(confirm("Game found. Would you like to join the game?"))
+    modal.customConfirm("Game found. Would you like to join the game?", (userClickYes) =>
     {
-        window.location = player_common.GAME_URL;
-    }
-    else
-    {
-        setupJoinGameButton();
-    }
+        if (userClickYes)
+        {
+            window.location = player_common.GAME_URL + "?gameId=" + gameId;
+        }
+        else
+        {
+            setupJoinGameButton();
+            //setupNewGameButton();
+        }
+    });
+
 }
 
 function setupJoinGameButton()
@@ -394,7 +406,7 @@ function setupJoinGameButton()
     // add button that lets you retroactively join the game
     joinGameButton.classList.remove("hidden");
     joinGameButton.addEventListener("click", event => {
-        window.location = player_common.GAME_URL;
+        window.location = player_common.GAME_URL + "?gameId=" + player_common.getPlayerGameID();
     });
 }
 
@@ -432,8 +444,8 @@ function leaveGame()
             console.log("Error when leaving game: " + res.err_msg);
             return;
         }
-        
-        alert("Reentered matching area")
+
+        modal.customAlert("Reentered matching area");
         resetPlayer();
         newGameButton.classList.add("hidden");
     })
