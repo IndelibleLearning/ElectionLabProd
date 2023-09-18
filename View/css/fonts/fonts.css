@@ -41,6 +41,13 @@
   src: url('BebasNeue-Regular.ttf');  
 }
 
+@font-face {
+  font-family: 'Copperplate-bd';
+  font-style: normal;
+  font-weight: bold;
+  src: url('copperb.woff');
+}
+
 
 
 

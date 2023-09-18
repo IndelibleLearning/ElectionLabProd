@@ -6,7 +6,7 @@
     z-index: 2;
     transform: translatex(-50%);
     border-radius: 5px;
-    border: 5px solid white;
+    border: 1px solid white;
     width: 320%;
     height: 60px;
     min-width: 0;
@@ -234,3 +234,12 @@
     fill: lightgreen;
 }
 
+.pip_group
+{
+    pointer-events: none;
+}
+
+.red .pip_group .pip_b
+{
+    fill: #F07763;
+}

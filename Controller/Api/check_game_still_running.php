@@ -38,10 +38,19 @@ if ($game_results->get_has_errors())
 }
 $game_room_id = $game_results->get_data()["room_id"];
 
+$all_players_results = $player_model->validate_players_in_game($game_id);
+if ($all_players_results->get_has_errors())
+{
+    echo $all_players_results->get_json_error();
+    die();
+}
+$all_players = $all_players_results->get_data();
+
 $still_running =
     $player["room_id"] == $room_id &&
     $player["game_id"] == $game_id &&
-    $room_id == $game_room_id;
+    $room_id == $game_room_id &&
+    count($all_players) >= 2;
 
 echo ApiResponse::success_data($still_running)->get_json();
 

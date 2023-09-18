@@ -81,12 +81,12 @@ function setupHideDeploymentButton()
         if (common.isHidden(deploymentArea))
         {
             common.show(deploymentArea);
-            hideDeploymentsButton.innerHTML = "Hide";
+            hideDeploymentsButton.innerHTML = "Hide Deployments";
         }
         else
         {
             common.hide(deploymentArea);
-            hideDeploymentsButton.innerHTML = "Deployments";
+            hideDeploymentsButton.innerHTML = "Show Deployments";
         }
     });
 }
@@ -127,6 +127,7 @@ function setupSubmit() {
                 alert("Successful deployment");
                 hideDeployPiecesArea();
                 hideDeploymentsArea();
+                common.hide(hideDeploymentsButton);
                 checkOtherPlayerDeployed();
             }
             else
@@ -185,7 +186,7 @@ function generateStateSliders(states) {
         let label = document.createElement("label");
         label.htmlFor = input.id;
         label.className = "state-slider-label";
-        label.innerText = `${state.state_abbrev} (${state.electoral_votes})`;
+        label.innerText = `${state.state_abbrev} ${state.electoral_votes}`;
 
         let div = document.createElement("div");
         div.id = `d${state.state_abbrev}`;

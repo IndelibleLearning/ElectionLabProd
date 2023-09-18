@@ -7,7 +7,7 @@
     </div>
     <div class="map-foreground">
         <div class="score-area">
-          <image src="images/game_assets/Year_2020.png" class="map-year"></image>
+          <image src="images/game_assets/Year_2024.png" class="map-year"></image>
 
           <div id="blue-scorecard" class="blue-scorecard scorecard">
               <div id="blue_player_name"  class="player-name"></div>
@@ -43,7 +43,7 @@
 	        <? include 'game_wait_view.php'; ?>
             <div class="map-image-container">
               <?php
-                include 'maps/map_image_2024.php';
+                include 'maps/map_image_2024_19pips_stars_hid.php';
               ?> 
             </div>
             <div class="cards-area">

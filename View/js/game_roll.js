@@ -81,7 +81,7 @@ function startRoll()
     common.get_request(url)
     .then(res => {
         const current_state = res.data.state_abbrev;
-        common.show_turn_number();
+        //common.show_turn_number();
         
         let url = `${api_common.API_URL_BASE}/get_deployments.php?room_code=${room_code}&game_id=${game_id}`;
         common.get_request(url)
@@ -335,6 +335,7 @@ function animateDiceForRound(index) {
             updateMapAfterRoll(winner_color, state_abbrev, state_EVs, winner_name);
             showAfterRollButton();
         } else {
+            common.setContinueButton(nextButton);
             nextButton.disabled = false;
         }
     }, delay);
@@ -484,7 +485,7 @@ function showAfterRollButton()
     showRoundWinner();
     common.refresh_event_cards();
 
-    common.setContinueButton(after_roll_button);
+    common.setContinueButton(afterRollButton);
 }
 
 function hideRollArea()

@@ -63,6 +63,7 @@ function checkOpponentPlayed()
 
 function goToRoll()
 {
+    common.update_map();
     common.hide(eventWaitingArea);
     common.deploy_event(common.ROLL_EVENT);
 }

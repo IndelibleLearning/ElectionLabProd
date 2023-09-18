@@ -18,6 +18,7 @@
     height: 200px;
     background-color: rosybrown;
     border-radius: 10px;
+    border: 1px solid saddlebrown;
     padding: 10px;
     box-sizing: border-box;
     position: relative;
@@ -51,6 +52,16 @@
 {
     background-color: aqua;
     
+}
+
+.card_title
+{
+    font-size: 50px;
+}
+
+.card_desc
+{
+    font-size: 20px;
 }
 
 @keyframes pulse-animation {

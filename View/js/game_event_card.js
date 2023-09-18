@@ -1,5 +1,6 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import {update_map} from "./game_common.js";
 
 const eventCardArea = document.querySelector("#event_card_area");
 const eventCardHand = document.querySelector("#event_card_hand");
@@ -205,6 +206,7 @@ function chooseCard(card_id)
         if (res.has_errors){
             console.log("event cards:" + res.error_msg);
         }
+        common.update_map();
     });
 }
 

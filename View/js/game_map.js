@@ -23,6 +23,7 @@ const BAR_FILL_SUFFIX = " .bar-fill";
 const PIPS_CONTAINER = "deployments";
 const PIPS_CONTAINER_SUFFIX = "_pips";
 const PIPS_CLASS = "pip_b";
+const PIP_GROUP_CLASS = "pip_group";
 
 const PIPS_BLUE_CLASS = "blue_pips";
 const PIPS_RED_CLASS = "red_pips"
@@ -190,7 +191,7 @@ function updatePips(deployments)
 
 function resetPips()
 {
-    let allPips = document.querySelectorAll(`.${PIPS_CLASS}`);
+    let allPips = document.querySelectorAll(`.${PIP_GROUP_CLASS}`);
     allPips.forEach(pip => {
         pip.classList.add("hidden");
     })
@@ -198,11 +199,9 @@ function resetPips()
 
 function setStatePips(state_abbrev, num_pieces)
 {
-    let pips = document.querySelectorAll(`#${state_abbrev}${PIPS_CONTAINER_SUFFIX} .${PIPS_CLASS}`);
+    let pips = document.querySelectorAll(`#${state_abbrev}${PIPS_CONTAINER_SUFFIX} .${PIP_GROUP_CLASS}`);
     
-    // TODO: eventually we may need to make this modular
-    num_pieces = Math.min(num_pieces, 5);
-    // TODO: ^^^
+    num_pieces = Math.min(num_pieces, pips.length);
 
     for(let i=0; i<num_pieces; i++)
     {

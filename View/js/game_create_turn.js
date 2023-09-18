@@ -85,7 +85,7 @@ function checkCreateTurn()
 
 function startCreateTurn()
 {
-    common.show_turn_number();
+    //common.show_turn_number();
     common.refresh_event_cards();
     checkShowCreateTurn();
 }

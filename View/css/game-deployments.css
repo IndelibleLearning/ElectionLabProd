@@ -2,7 +2,7 @@
 {
     width: 75%;
     max-width: 700px;
-    padding-bottom: 14px;
+    padding-bottom: 60px;
     padding-top: 0;
 }
 
@@ -29,7 +29,7 @@
 
 .hide-deployments-button
 {
-    position: absolute;
+    position: fixed;
     right: 10px;
     bottom: 10px;
 }
@@ -37,6 +37,16 @@
 .resource-num
 {
     font-size: 25px;
+    position: absolute;
+    left: 10px;
+    max-width: 50%;
+    line-height: .8;
+    bottom: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-state-deployments
@@ -159,4 +169,11 @@ input.state-slider::-moz-range-thumb {
         width: 15px;
         height: 15px;
     }
+}
+
+.deployments-area #submit_deployments.elo-button
+{
+    position: absolute;
+    right: 10px;
+    text-align: center;
 }

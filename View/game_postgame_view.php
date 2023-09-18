@@ -49,4 +49,5 @@
      <?php include 'histograms/blank_strategy_image.php' ?>
   </div>
   <button id="answer-question" class="elo-button">Select</button>
+    <button id="postgame-back-to-lobby" class="hidden elo-button">Back to Lobby</button>
 </div>

@@ -24,6 +24,7 @@ const BACK_TO_LOBBY_ID = "#back_to_lobby";
 
 const GAME_TERMINATED_MODAL = "#game-terminated";
 const GAME_TERMINATED_BUTTON = "#game-terminated-button";
+const helpButton = document.querySelector("#help-button");
 
 const CHECK_STILL_RUNNING_PERIOD = 1000;
 
@@ -34,6 +35,7 @@ function setup()
     setupGameDetailsInputs();
     setupStartGameButton();
     setupBackToRoomButton();
+    setupHelpButton();
     setupCheckGameStillRunning();
     common.deploy_event(common.UPDATE_MAP_EVENT);
     startGame();
@@ -72,6 +74,13 @@ function setupGameDetail(buttonId, inputId, saveKey)
     let button = document.querySelector(buttonId);
     button.addEventListener("click", function(e){
         window.localStorage.setItem(saveKey, input.value);
+    });
+}
+
+function setupHelpButton()
+{
+    helpButton.addEventListener("click", () => {
+        game_tutorials.showTutorial();
     });
 }
 

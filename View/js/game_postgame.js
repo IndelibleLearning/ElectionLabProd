@@ -1,11 +1,13 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import {customConfirm} from "./modal.js";
 
 const postGameArea = document.querySelector("#post-game-area");
 const strategies = document.querySelector("#strategies");
 const answerQuestionButton = document.querySelector("#answer-question");
 const radioChoices = document.querySelectorAll(".strategy-radio");
 const blankStrat = document.querySelector("#blank-strategy");
+const postgameBackToLobbyButton = document.querySelector("#postgame-back-to-lobby");
 
 let strategiesData = setupStrategies();
 let fake = fakeData();
@@ -83,12 +85,28 @@ function submitAnswer(correctAnswer, chosenAnswer)
     let url = `${api_common.API_URL_BASE}/histogram_answer.php?player_name=${player_name}&game_id=${game_id}&correct_answer=${correctAnswer}&player_answer=${chosenAnswer}`;
     common.get_request(url)
     .then(res=>{
+        showBackToLobbyButton();
         if (res.has_errors){
             console.log(res.error_msg);
             return;
         }
         console.log("Success")
     });
+}
+
+function showBackToLobbyButton()
+{
+    const room_code = document.querySelector("#room_code").value;
+    postgameBackToLobbyButton.addEventListener("click", ()=>{
+        customConfirm("Are you sure you want to leave the game?", (userClickYes) => {
+            if (userClickYes)
+            {
+                window.location = common.getRoomUrl(room_code);
+            }
+        });
+    });
+
+    common.show(postgameBackToLobbyButton);
 }
 
 function showPostGame()
@@ -187,7 +205,7 @@ function setupStrategies()
         "MI": 3,
         "GA": 4,
         "PA": 4,
-        "FL": 5
+        "ME": 5
     }
     
     strats["B"] = {
@@ -202,7 +220,7 @@ function setupStrategies()
         "MI": 2,
         "GA": 2,
         "PA": 3,
-        "FL": 5
+        "ME": 5
     }
     
     strats["C"] = {
@@ -217,7 +235,7 @@ function setupStrategies()
         "MI": 2,
         "GA": 2,
         "PA": 2,
-        "FL": 2
+        "ME": 2
     }
     
     strats["D"] = {
@@ -232,7 +250,7 @@ function setupStrategies()
         "MI": 1,
         "GA": 1,
         "PA": 1,
-        "FL": 1
+        "ME": 1
     }
     
     return strats;

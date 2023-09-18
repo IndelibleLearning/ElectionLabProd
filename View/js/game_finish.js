@@ -1,14 +1,18 @@
 import * as common from "./game_common.js";
 import * as api_common from "./api_common.js";
+import {doConfettiEffect} from "./confetti.js";
+import {customConfirm} from "./modal.js";
 
 const finishArea = document.querySelector("#finish-area");
 const scoreboard = document.querySelector("#scoreboard");
 const postGameButton = document.querySelector("#post-game-button");
+const finishBackToLobbyButton = document.querySelector("#finish-back-to-lobby");
 
 function setupFinish()
 {
     setupFinishEventListener();
-    setupGoToPostGameButton();
+    //setupGoToPostGameButton(); Scrap for now
+    setupFinishBackToLobbyButton();
 }
 setupFinish();
 
@@ -28,6 +32,20 @@ function setupGoToPostGameButton()
     })
 }
 
+function setupFinishBackToLobbyButton()
+{
+    const room_code = document.querySelector("#room_code").value;
+    finishBackToLobbyButton.addEventListener("click", ()=>{
+        customConfirm("Are you sure you want to leave the game?", (userClickYes) => {
+            if (userClickYes)
+            {
+                window.location = common.getRoomUrl(room_code);
+            }
+        });
+    });
+
+}
+
 function showFinish()
 {
     let room_code = document.querySelector("#room_code").value;
@@ -40,6 +58,7 @@ function showFinish()
        if (res.data.winner_name)
        {
             scoreboard.innerHTML = "Winner is " + res.data.winner_name;
+            doConfettiEffect();
        }
        else
        {

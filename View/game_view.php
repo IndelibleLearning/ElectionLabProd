@@ -15,9 +15,10 @@
   <body id="main">
       <div class="header">
           <button id="back_to_lobby" class="back_to_lobby">Back to Lobby</button>
-          <div>
+          <div class="game-title">
                 Election Lab
           </div>
+          <button id="help-button" class="help-button">Help</button>
       </div>
 	  
       <div id="game_entry" class="elo_test_section game_details hidden">

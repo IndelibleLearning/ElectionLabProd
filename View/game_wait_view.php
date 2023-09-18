@@ -1,5 +1,5 @@
 <div id="waiting_event_card_area" class="hidden elo-prompt">
-  Waiting for other player to pick event card
+  Waiting for other player
 </div>
 
 <div id="waiting_depoyments_area" class="hidden elo-prompt">

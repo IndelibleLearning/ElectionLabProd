@@ -3,13 +3,15 @@
 <div id="deployments_area" class="hidden deployments-area elo-action-screen">
       <div id="deploy_pieces_area" class="hidden">
           <h1 class="deployments-title elo-header">Deploy Campaign Resources</h1>
-    	  <div class="resource-num">
-    	      <span>Campaign Resources Left:</span> 
-    	      <span id="total_pieces">24</span>
-    	  </div>
         <ul id="input-state-deployments" class="input-state-deployments">
 
-    </ul> 
+    </ul>
+          <div class="resource-num">
+              <div>
+                  <span>Campaign Resources Left:</span>
+                  <span id="total_pieces">24</span>
+              </div>
+          </div>
         <button id="submit_deployments" class="elo-button">
             Submit
         </button> 
@@ -26,5 +28,5 @@
 
 
 <button id="hide-deployments-button" class="hidden hide-deployments-button elo-button">
-    Hide
+    Hide Deployments
 </button>

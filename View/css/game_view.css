@@ -6,6 +6,21 @@ body
     font-family: "BEBASNEUE BOLD", sans-serif;
 }
 
+.game-title
+{
+    text-align: center;
+}
+
+.help-button
+{
+    position: absolute;
+    right: 5px;
+    position: absolute;
+    bottom: 1px;
+    top: 1px;
+    font-size: 15px;
+}
+
 .elo_test_section.game_details
 {
     position: static;
@@ -139,4 +154,9 @@ opacity: 0;
 
 .blue_pips .pip_r{
     fill:#93BEE5;
+}
+
+.copperplate-bd
+{
+    font-family: "Copperplate-bd";
 }
