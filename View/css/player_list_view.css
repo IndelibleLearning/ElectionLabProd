@@ -1,7 +1,10 @@
 .intro,
 .mask.d-flex.align-items-center
 {
-    background-color: #e96656;
+    background-image: url("../images/game_assets/OvalFloorBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .title
@@ -9,6 +12,11 @@
     color: white;
     padding: 10px 0;
     
+}
+
+#title_room_code
+{
+    color: green;
 }
 
 .instructions
@@ -62,8 +70,13 @@
 
 .local_player
 {
-    color: green;
+    color: red;
     font-weight: bold;
+}
+
+.matched_players .local_player
+{
+    color: #5e5efd;
 }
 
 .join_prompt
@@ -74,7 +87,7 @@
 .join_link
 {
     font-size: 20px;
-    color: #4444DD;
+    color: green;
     font-weight: bold;
 }
 

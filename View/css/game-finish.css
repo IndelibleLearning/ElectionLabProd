@@ -1,4 +1,31 @@
 .finish-winner
 {
+    font-size: 32px;
+    padding-bottom: 40px;
+}
+
+.finish-background,
+.finish-mask
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.finish-mask
+{
+    background: rgba(.5,.5,.5,.5);
+}
+
+.finish-game-result
+{
     font-size: 50px;
+}
+
+.finish-area .elo-action-screen
+{
+    padding: 55px 50px;
 }

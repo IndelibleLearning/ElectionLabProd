@@ -6,13 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Election Lab Online</title>
     <!-- Bootstrap -->
-
+    <link rel="stylesheet" href="css/fonts/fonts.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/game_view.css">
     <link rel="stylesheet" href="css/event-card-hand.css">
-    <link rel="stylesheet" href="css/fonts/fonts.css">
   </head>
   <body id="main">
+      <div class="main-bg">
+          <img src="images/game_assets/OvalFloorBackground.png" />
+      </div>
       <div class="header">
           <button id="back_to_lobby" class="back_to_lobby">Back to Lobby</button>
           <div class="game-title">

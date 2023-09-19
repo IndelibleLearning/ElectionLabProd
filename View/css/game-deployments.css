@@ -2,13 +2,18 @@
 {
     width: 75%;
     max-width: 700px;
-    padding-bottom: 60px;
+    /*padding-bottom: 60px;*/
     padding-top: 0;
+}
+
+.deploy-pieces-area
+{
+    padding-bottom: 60px;
 }
 
 .show-color-modal
 {
-    padding: 50px 0;
+    padding: 25px 0;
 }
 
 .show-color-message
@@ -16,15 +21,34 @@
     font-size: 75px;
 }
 
+.red .show-color-message
+{
+    color: #b21c1c;
+}
+
+.blue .show-color-message
+{
+    color: darkblue;
+}
+
 .deployments-title.elo-header
 {
-    font-size: 53px;
+    font-size: 30px;
+    font-family: "Brim Narrow Combined";
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, -1px 1px white, 1px 1px white, 1px -1px white, -1px -1px white;
 }
 
 .deployments-area ul
 {
     list-style-type: none;
     padding: 0;
+}
+
+.deployments-area .buttons-area
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .hide-deployments-button
@@ -34,6 +58,25 @@
     bottom: 10px;
 }
 
+.player-color
+{
+    font-size: 105px;
+    line-height: .7;
+    padding-bottom: 40px;
+    font-family: "Brim Narrow Combined";
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, -1px 1px white, 1px 1px white, 1px -1px white, -1px -1px white;
+}
+
+.red .player-color
+{
+    color: #b21c1c;
+}
+
+.blue .player-color
+{
+    color: darkblue;
+}
+
 .resource-num
 {
     font-size: 25px;
@@ -41,7 +84,7 @@
     left: 10px;
     max-width: 50%;
     line-height: .8;
-    bottom: 0;
+    bottom: 10px;
     height: 60px;
     display: flex;
     flex-direction: row;
@@ -176,4 +219,5 @@ input.state-slider::-moz-range-thumb {
     position: absolute;
     right: 10px;
     text-align: center;
+    bottom: 10px
 }

@@ -11,6 +11,7 @@ const CHECK_OTHER_DEPLOY_RATE = 2000;
 
 const deploymentsWaitingArea = document.querySelector("#waiting_depoyments_area");
 const hideDeploymentsButton = document.querySelector("#hide-deployments-button");
+const submitButton = document.querySelector("#submit_deployments");
 
 // tutorial
 const colorModal = document.querySelector("#show-color-modal");
@@ -65,7 +66,7 @@ function setColorMessage()
     const color = common.getPlayerColor();
     if (color)
     {
-        colorMessage.innerHTML = `You are ${color}!`;
+        colorMessage.innerHTML = `You are <div class="player-color">${color}</div>`;
     }
     else
     {
@@ -91,7 +92,6 @@ function setupHideDeploymentButton()
     });
 }
 function setupSubmit() {
-    var submitButton = document.querySelector("#submit_deployments");
     submitButton.addEventListener("click", function(e){
         submitButton.setAttribute("disabled", "true");
         // first check if the num pieces is right
@@ -232,10 +232,13 @@ function updateTotalPiecesDisplay(piecesUsed) {
 
     if (piecesUsed > DEPLOYMENT_PIECES_MAX) {
         totalPiecesDiv.style = "color: red";
+        submitButton.setAttribute("disabled", "true");
     } else if (piecesUsed === DEPLOYMENT_PIECES_MAX) {
+        submitButton.removeAttribute("disabled");
         totalPiecesDiv.style = "color: green";
     } else {
         totalPiecesDiv.style = "color: black";
+        submitButton.removeAttribute("disabled");
     }
 }
 

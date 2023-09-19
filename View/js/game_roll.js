@@ -198,6 +198,7 @@ function setupRollButton()
               // round title
               let title = document.createElement("h3");
               title.innerHTML = `Round ${i + 1}`;
+              title.className = "elo-title";
               round.appendChild(title);
 
                let round_container = document.createElement("div");

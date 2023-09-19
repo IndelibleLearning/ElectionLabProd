@@ -66,6 +66,7 @@
     transform: translateY(-50%);
     color: white;
     font-size: 25px;
+    font-family: 'Brim Narrow Combined';
 }
 
 .elo-prompt::after
@@ -74,9 +75,9 @@
     width: 100%;
     position: absolute;
     content: "";
-    box-shadow: 0px 0px 40px 55px rgb(0 0 0 / 75%);
-    -webkit-box-shadow: 0px 0px 40px 55px rgb(0 0 0 / 75%);
-    -moz-box-shadow: 0px 0px 40px 55px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 40px 80px rgb(0 0 0 / 75%);
+    -webkit-box-shadow: 0px 0px 40px 80px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 0px 0px 40px 80px rgba(0,0,0,0.75);
     z-index: -1;
 }
 
@@ -114,11 +115,6 @@ button.elo-button:hover
 
 .elo-header
 {
-    
-}
-
-.elo-header
-{
     margin-bottom: 15px;
     font-family: 'BebasNeue Bold';
     font-size: 35px;
@@ -134,6 +130,11 @@ button.elo-button:hover
     color: darkblue;
 }
 
+.elo-title
+{
+    font-family: "Brim Narrow Combined";
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, -1px 1px white, 1px 1px white, 1px -1px white, -1px -1px white;
+}
 
 .game-terminated
 {

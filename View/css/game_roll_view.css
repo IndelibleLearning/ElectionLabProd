@@ -21,6 +21,11 @@
     background: linear-gradient(180deg, rgba(240,105,97,1) 0%, rgba(249,228,197,1) 100%);
 }
 
+.roll-area .elo-title
+{
+    font-size: 36px;
+}
+
 .dice-area h3 
 {
     font-size: 35px;

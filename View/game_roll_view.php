@@ -2,7 +2,7 @@
 
 <div id="roll_area" class="hidden elo_test_section roll-area">
   <div id="roll-container">
-      <div id="roll_title_header" class="elo-header">
+      <div id="roll_title_header" class="elo-header elo-title">
           Now Campaigning For
       </div>
       <div id="roll_title" class="roll-title">

@@ -6,6 +6,15 @@ body
     font-family: "BEBASNEUE BOLD", sans-serif;
 }
 
+.main-bg img
+{
+    position: fixed;
+    left: 50%;
+    height: 100%;
+    min-width: 100%;
+    transform: translateX(-50%);
+}
+
 .game-title
 {
     text-align: center;

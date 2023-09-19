@@ -40,11 +40,11 @@
 .map-section
 {
     width: 100%;
-    /*background-image: url("../images/game_assets/MockupFlattenedGuide.png");*/
+    /*background-image: url("../images/game_assets/MockupFlattenedGuide.png");
     background-image: url("../images/game_assets/OvalFloorBackground.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center;*/
 }
 
 .map-background 

@@ -5,6 +5,7 @@ import {customConfirm} from "./modal.js";
 
 const finishArea = document.querySelector("#finish-area");
 const scoreboard = document.querySelector("#scoreboard");
+const finishResult = document.querySelector("#finish-game-result");
 const postGameButton = document.querySelector("#post-game-button");
 const finishBackToLobbyButton = document.querySelector("#finish-back-to-lobby");
 
@@ -50,6 +51,7 @@ function showFinish()
 {
     let room_code = document.querySelector("#room_code").value;
     let game_id = document.querySelector("#game_id").value;
+    let player_name = document.querySelector("#player_name").value;
     let url = `${api_common.API_URL_BASE}/get_winner.php?room_code=${room_code}&game_id=${game_id}`;
     common.get_request(url)
     .then(res=>{
@@ -57,8 +59,16 @@ function showFinish()
        common.show(finishArea);
        if (res.data.winner_name)
        {
-            scoreboard.innerHTML = "Winner is " + res.data.winner_name;
-            doConfettiEffect();
+            scoreboard.innerHTML = `${res.data.winner_name} has been elected`;
+            if (res.data.winner_name == player_name)
+            {
+                doConfettiEffect();
+                finishResult.innerHTML = "You won";
+            }
+            else
+            {
+                finishResult.innerHTML = "You lost";
+            }
        }
        else
        {
