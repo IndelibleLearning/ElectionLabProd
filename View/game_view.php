@@ -20,7 +20,7 @@
           <div class="game-title">
                 Election Lab
           </div>
-          <button id="help-button" class="help-button">Help</button>
+          <button id="help-button" class="help-button">Tutorial</button>
       </div>
 	  
       <div id="game_entry" class="elo_test_section game_details hidden">

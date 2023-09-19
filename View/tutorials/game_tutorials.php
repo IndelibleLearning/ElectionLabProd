@@ -2,7 +2,7 @@
 
 <div id="game-tutorials" class="game-tutorials hidden">
     <div class="game-tutorials-container elo-action-screen">
-        <div id="close-tutorials" class="close-tutorials">X</div>
+            <image id="close-tutorials" class="close-tutorials" src="images/tutorials/X_white.png" alt="Close">
 
         <!-- Tab Links -->
         <div class="tab-links">

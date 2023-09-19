@@ -1,14 +1,14 @@
 <div id="tutorial-dice" class="tutorial-dialogue">
     <div class="image-section">
-        <img class="image-1" src="images/tutorials/dice1.png" alt="Step 1">
-        <img class="image-2 hidden" src="images/tutorials/dice2.png" alt="Step 2">
-        <img class="image-3 hidden" src="images/tutorials/dice3.png" alt="Step 3">
-        <img class="image-4 hidden" src="images/tutorials/dice4.png" alt="Step 4">
-        <img class="image-5 hidden" src="images/tutorials/dice5.png" alt="Step 5">
-        <img class="image-6 hidden" src="images/tutorials/dice6.png" alt="Step 6">
-        <img class="image-7 hidden" src="images/tutorials/dice7.png" alt="Step 7">
-        <button class="previous-button hidden"><image src="images/tutorials/symbol_lt.svg?width=32" alt="Previous">Previous</button>
-        <button class="next-button" type="image"><image src="images/tutorials/symbol_gt.svg?width=32" alt="Next">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button>
+        <img class="image-1 tutorial-image" src="images/tutorials/dice1.png" alt="Step 1">
+        <img class="image-2 tutorial-image hidden" src="images/tutorials/dice2.png" alt="Step 2">
+        <img class="image-3 tutorial-image hidden" src="images/tutorials/dice3.png" alt="Step 3">
+        <img class="image-4 tutorial-image hidden" src="images/tutorials/dice4.png" alt="Step 4">
+        <img class="image-5 tutorial-image hidden" src="images/tutorials/dice5.png" alt="Step 5">
+        <img class="image-6 tutorial-image hidden" src="images/tutorials/dice6.png" alt="Step 6">
+        <img class="image-7 tutorial-image hidden" src="images/tutorials/dice7.png" alt="Step 7">
+        <image class="previous-button tutorial-arrow hidden" src="images/tutorials/Arrow_white.png" alt="Previous">
+        <image class="next-button tutorial-arrow" src="images/tutorials/Arrow_white.png" alt="Next">
     </div>
     <div class="navigation-section">
         <button id="step-1" class="breadcrumb current"></button>
