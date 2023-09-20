@@ -16,13 +16,22 @@ export function setupTutorials() {
     setupTabs();
 }
 
+export function resetTutorials()
+{
+    tutorial.resetTutorial(tutorialOverview);
+    tutorial.resetTutorial(tutorialDeployments);
+    tutorial.resetTutorial(tutorialDice);
+}
+
 export function showTutorial()
 {
+    resetTutorials();
     common.show(gameTutorials);
 }
 
 export function hideTutorials()
 {
+    resetTutorials();
     common.hide(gameTutorials);
 }
 

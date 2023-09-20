@@ -1,4 +1,5 @@
 import * as common from "./game_common.js";
+import {registerDivForResize, resizeFontToFit} from "./resizeFontToFit.js";
 export function initializeTutorial(tutorial) {
     var breadcrumbs = tutorial.querySelectorAll('.breadcrumb');
     tutorial.dataset.maxIndex = breadcrumbs.length;
@@ -18,6 +19,27 @@ export function initializeTutorial(tutorial) {
             updateTutorial(tutorial, index + 1);
         });
     });
+
+    const paragraphs = tutorial.querySelectorAll('.text-section  p');
+    paragraphs.forEach(function(paragraph) {
+        registerDivForResize(paragraph);
+    });
+}
+
+function resizeParagraphs(tutorial)
+{
+    const paragraphs = tutorial.querySelectorAll('.text-section  p');
+    paragraphs.forEach(function(paragraph) {
+        resizeFontToFit(paragraph);
+    });
+}
+
+function toggleParagraphsOpacity(tutorial, opacity)
+{
+    const paragraphs = tutorial.querySelectorAll('.text-section  p');
+    paragraphs.forEach(function(paragraph) {
+        paragraph.style.opacity = opacity;
+    });
 }
 
 export function updateTutorial(tutorial, index) {
@@ -28,6 +50,16 @@ export function updateTutorial(tutorial, index) {
     common.hide(currentText);
     common.show(tutorial.querySelector('.image-' + index));
     common.show(tutorial.querySelector('.text-' + index));
+    requestAnimationFrame(() => {
+        toggleParagraphsOpacity(tutorial, 0);
+        requestAnimationFrame(() => {
+            resizeParagraphs(tutorial);
+            requestAnimationFrame(() => {
+                toggleParagraphsOpacity(tutorial, 1);
+            });
+        });
+    });
+
     updateBreadcrumbs(tutorial.querySelector('.navigation-section'), 'step-' + index);
 
     var previousButton = tutorial.querySelector('.previous-button');
@@ -42,6 +74,11 @@ export function updateTutorial(tutorial, index) {
     } else {
         common.show(nextButton);
     }
+}
+
+export function resetTutorial(tutorial)
+{
+    updateTutorial(tutorial, 1);
 }
 
 

@@ -36,7 +36,7 @@
                       You are joined as <span id="player_name_display"></span>
                   </div>
                 <div class="card mask-custom matched_players">
-                  <div class="card-body p-5 text-white">
+                  <div class="card-body p-5">
                     <div class="my-4">
                         <button id="join_game_button" class="hidden match_players_button">Play Current Game</button>
                          <button id="new_game_button" class="hidden new_game_button">New Game</button>
@@ -50,7 +50,7 @@
                   </div>
                 </div>
                 <div class="card mask-custom unmatched_players">
-                  <div class="card-body p-5 text-white">
+                  <div class="card-body p-5">
     
                     <div class="my-4">
                         <div class="form-check form-switch match_players_button_container hidden" id="match_players_button_container">

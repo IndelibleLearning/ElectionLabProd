@@ -1,0 +1,45 @@
+.join-room
+{
+    background-image: url("../images/hub_assets/joinroom_bg_smol.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.join-room-text
+{
+    font-size: 25px;
+}
+
+.join-room-title
+{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.join-room .mask-custom
+{
+    background-color: rgba(230,232,255,.5);
+}
+
+.indelible-logo
+{
+    position: absolute;
+    width: 250px;
+    right: 50px;
+    bottom: 50px;
+}
+
+.join-room-elo-title
+{
+    height: 125px;
+}
+
+.join-room-elo-title-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}

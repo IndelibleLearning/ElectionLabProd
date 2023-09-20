@@ -1,4 +1,5 @@
 import * as common from "./game_common.js";
+import {resetTutorials} from "./game_tutorials.js";
 
 export function initTabs(container) {
     var tabs = container.querySelectorAll(".tab-link");
@@ -10,6 +11,7 @@ export function initTabs(container) {
 }
 
 export function openTutorial(tab, container) {
+    resetTutorials();
     // Hide all tab contents
     var tabContents = container.querySelectorAll(".tabcontent");
     tabContents.forEach(common.hide);
