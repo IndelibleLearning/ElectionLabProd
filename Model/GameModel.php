@@ -44,4 +44,16 @@
             $param_types = "isi";
             return $this->update("UPDATE games SET winner_id=?, ended_at=? where id=?", $param_types, [$winner_id, $end_date, $game_id]);
         }
+
+        public function set_blue_player($game_id, $player_id)
+        {
+            $param_types = "ii";
+            return $this->update("UPDATE games SET blue_player_id=? where id=?", $param_types, [$player_id, $game_id]);
+        }
+
+        public function set_red_player($game_id, $player_id)
+        {
+            $param_types = "ii";
+            return $this->update("UPDATE games SET red_player_id=? where id=?", $param_types, [$player_id, $game_id]);
+        }
     }

@@ -395,7 +395,7 @@ function promptJoinGame(gameId)
         else
         {
             setupJoinGameButton();
-            //setupNewGameButton();
+            setupNewGameButton();
         }
     });
 

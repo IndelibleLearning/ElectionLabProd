@@ -3,6 +3,7 @@
     require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
     require_once PROJECT_ROOT_PATH . "/Model/PlayerModel.php";
     require_once PROJECT_ROOT_PATH . "/Model/RoomModel.php";
+    require_once PROJECT_ROOT_PATH . "/Model/GameModel.php";
     require_once PROJECT_ROOT_PATH . "/Controller/Api/RestHelper.php";
     require_once PROJECT_ROOT_PATH . "/Model/ApiResponse.php";
     header('Content-Type: application/json; charset=utf-8');
@@ -104,7 +105,7 @@
 
         /// set player color
         $player_id = $player["id"];
-        $color_url = CONTROLLER_API_PATH . "set_player_color.php?player_id=$player_id&color_name=$color_name";
+        $color_url = CONTROLLER_API_PATH . "set_player_color.php?player_id=$player_id&color_name=$color_name&game_id=$game_id";
         RestHelper::rest_call($color_url);
 
         // player join

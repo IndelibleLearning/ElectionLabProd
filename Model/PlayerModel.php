@@ -58,13 +58,15 @@
             $results = $this->get_player_in_room($room_id, $player_name);
             return ApiResponse::validate_is_empty($results, $error_code, $error_msg);
         }
-        
+
         public function get_players_in_game($game_id)
         {
             $param_types = "i";
-            return $this->select("SELECT * FROM players where game_id = ?", $param_types, [$game_id]);
+            $query = "SELECT p.* FROM players p JOIN games g ON (p.id = g.red_player_id OR p.id = g.blue_player_id) WHERE g.id = ?";
+            return $this->select($query, $param_types, [$game_id]);
         }
-        
+
+
         public function validate_players_in_game($game_id)
         {
             $has_errors = false;

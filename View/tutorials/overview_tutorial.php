@@ -7,7 +7,7 @@
         <img class="image-5 tutorial-image hidden" src="images/tutorials/map_image_2024_swing.png" alt="Step 3">
         <img class="image-6 tutorial-image hidden" src="images/tutorials/map_image_2024_swing.png" alt="Step 4">
         <img class="image-7 tutorial-image hidden" src="images/tutorials/map_image_2024_swing.png" alt="Step 4">
-        <image class="previous-button tutorial-arrow hidden" src="images/tutorials/Arrow_white.png" alt="Previous">
+        <image class="previous-button tutorial-arrow" src="images/tutorials/Arrow_white.png" alt="Previous">
         <image class="next-button tutorial-arrow" src="images/tutorials/Arrow_white.png" alt="Next">
     </div>
     <div class="navigation-section">

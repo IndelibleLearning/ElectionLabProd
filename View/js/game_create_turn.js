@@ -10,7 +10,7 @@ const waitingRollArea = document.querySelector("#waiting-roll-area");
 const WAITING_OTHER_PLAYER_MS = 1000;
 const SINGLE_CLICK_CODE = 1;
 
-const CREATE_TURN_LABEL = "Pick a state";
+const CREATE_TURN_LABEL = "Pick a swing state";
 
 let wait_turn_interval = null;
 

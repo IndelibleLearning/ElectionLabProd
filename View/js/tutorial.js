@@ -44,6 +44,15 @@ function toggleParagraphsOpacity(tutorial, opacity)
 
 export function updateTutorial(tutorial, index) {
     var maxIndex = tutorial.dataset.maxIndex;
+    // Check for out-of-bounds navigation for individual tutorials
+    if (index < 1) {
+        tutorial.dispatchEvent(new Event('goToPreviousTutorial', { bubbles: true }));
+        return;
+    } else if (index > maxIndex) {
+        tutorial.dispatchEvent(new Event('goToNextTutorial', { bubbles: true }));
+        return;
+    }
+
     var currentImage = tutorial.querySelector('.image-section > :not(.hidden)');
     var currentText = tutorial.querySelector('.text-section > :not(.hidden)');
     common.hide(currentImage);
@@ -62,18 +71,7 @@ export function updateTutorial(tutorial, index) {
 
     updateBreadcrumbs(tutorial.querySelector('.navigation-section'), 'step-' + index);
 
-    var previousButton = tutorial.querySelector('.previous-button');
-    var nextButton = tutorial.querySelector('.next-button');
-    if (index === 1) {
-        common.hide(previousButton);
-    } else {
-        common.show(previousButton);
-    }
-    if (index === parseInt(maxIndex)) {
-        common.hide(nextButton);
-    } else {
-        common.show(nextButton);
-    }
+    tutorial.dispatchEvent(new Event('tutorialUpdated', { bubbles: true }));
 }
 
 export function resetTutorial(tutorial)
@@ -90,5 +88,27 @@ function updateBreadcrumbs(navigationSection, currentStepId) {
     var currentBreadcrumb = navigationSection.querySelector('#' + currentStepId);
     currentBreadcrumb.classList.add('current');
 }
+
+export function setButtonVisibility(tutorial, prevVisible, nextVisible) {
+    const previousButton = tutorial.querySelector('.previous-button');
+    const nextButton = tutorial.querySelector('.next-button');
+    if (prevVisible) {
+        common.show(previousButton);
+    } else {
+        common.hide(previousButton);
+    }
+
+    if (nextVisible) {
+        common.show(nextButton);
+    } else {
+        common.hide(nextButton);
+    }
+}
+
+export function getCurrentIndex(tutorial) {
+    return parseInt(tutorial.querySelector('.navigation-section > .current').id.split('-')[1]);
+}
+
+
 
 

@@ -14,6 +14,12 @@ export function setupTutorials() {
     tutorial.initializeTutorial(tutorialDice);
     setupTutorialClose();
     setupTabs();
+
+    gameTutorials.addEventListener('tutorialUpdated', (e) => {
+        const currentTutorial = e.target;
+        updateButtonVisibilityBasedOnTabContext(currentTutorial);
+    });
+
 }
 
 export function resetTutorials()
@@ -42,7 +48,49 @@ function setupTutorialClose()
     });
 }
 
-function setupTabs()
-{
+function setupTabs() {
     tabs.initTabs(gameTutorials);
+
+    // Update initially
+    updateButtonVisibilityBasedOnTabContext(tutorialOverview);
+    updateButtonVisibilityBasedOnTabContext(tutorialDeployments);
+    updateButtonVisibilityBasedOnTabContext(tutorialDice);
+
+    gameTutorials.addEventListener('goToPreviousTutorial', () => {
+        if (tabs.hasPreviousTab()) {
+            tabs.tabsList[tabs.activeTabIndex - 1].click();
+            updateButtonVisibilityBasedOnTabContext(tutorialOverview);
+            updateButtonVisibilityBasedOnTabContext(tutorialDeployments);
+            updateButtonVisibilityBasedOnTabContext(tutorialDice);
+        }
+    });
+
+    gameTutorials.addEventListener('goToNextTutorial', () => {
+        if (tabs.hasNextTab()) {
+            tabs.tabsList[tabs.activeTabIndex + 1].click();
+            updateButtonVisibilityBasedOnTabContext(tutorialOverview);
+            updateButtonVisibilityBasedOnTabContext(tutorialDeployments);
+            updateButtonVisibilityBasedOnTabContext(tutorialDice);
+        }
+    });
+
+    // Add an event listener for the custom event.
+    gameTutorials.addEventListener('tabOpened', (e) => {
+        const currentTutorial = document.querySelector('.tabcontent:not(.hidden)'); // Replace '.tutorial-class' with the appropriate class or identifier for your tutorial elements.
+        updateButtonVisibilityBasedOnTabContext(currentTutorial);
+    });
 }
+
+function updateButtonVisibilityBasedOnTabContext(currentTutorial) {
+    if (!currentTutorial) {
+        console.warn("No tutorial element provided.");
+        return;
+    }
+
+    const currentIndex = tutorial.getCurrentIndex(currentTutorial);
+    const showPrev = !(tabs.isOnFirstTab() && currentIndex === 1);
+    const showNext = !(tabs.isOnLastTab() && currentIndex === parseInt(currentTutorial.dataset.maxIndex));
+
+    tutorial.setButtonVisibility(currentTutorial, showPrev, showNext);
+}
+

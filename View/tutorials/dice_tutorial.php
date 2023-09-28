@@ -10,7 +10,7 @@
         <img class="image-8 tutorial-image hidden" src="images/tutorials/dice6.png" alt="Step 6">
         <img class="image-9 tutorial-image hidden" src="images/tutorials/dice7.png" alt="Step 7">
         <img class="image-10 tutorial-image hidden" src="images/tutorials/dice7.png" alt="Step 7">
-        <image class="previous-button tutorial-arrow hidden" src="images/tutorials/Arrow_white.png" alt="Previous">
+        <image class="previous-button tutorial-arrow" src="images/tutorials/Arrow_white.png" alt="Previous">
         <image class="next-button tutorial-arrow" src="images/tutorials/Arrow_white.png" alt="Next">
     </div>
     <div class="navigation-section">
