@@ -7,5 +7,9 @@
 </div>
 
 <div id="waiting-roll-area" class="hidden elo-prompt">
-  Waiting for other player to <br/> pick Swing State . . .
+    Waiting for other player to <br/> pick Swing State . . .
+</div>
+
+<div id="waiting-roll-area-first" class="hidden elo-prompt">
+    Player that is behind <br/> chooses a Swing State . . .
 </div>

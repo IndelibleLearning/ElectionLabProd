@@ -1,6 +1,14 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 932.7 582.5" style="enable-background:new 0 0 932.7 582.5;" xml:space="preserve">
-            <style type="text/css">
+    <defs>
+        <filter id="glow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="blurred"/>
+            <feOffset in="blurred" dx="0" dy="0" result="offsetBlurred"/>
+            <feComposite operator="over" in="SourceGraphic" in2="offsetBlurred" result="composite"/>
+        </filter>
+    </defs>
+
+    <style type="text/css">
             	@import url("../css/fonts/fonts.css?family=Copperplate-bd:700");
             	.st0{fill:#F9E4C5;}
             	.st1{fill:#F07763;}

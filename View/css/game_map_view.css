@@ -215,24 +215,33 @@
 {
     fill: #383969; 
 }
-
-
-.selectable-state path
-{
-    stroke: #ba9550;
+.selectable-state path {
+    stroke: blue;
     stroke-width: 3px;
+    animation: pulseShadow 1.2s infinite alternate;
 }
 
-.selectable-state:hover path
-{
+.selectable-state:hover path {
     fill: #ba9550;
     cursor: pointer;
+    stroke: #ba9550;
+    animation: none;
 }
 
-.selectable-state.selected path
-{
-    fill: lightgreen;
+.selectable-state.selected path {
+    animation: none;
 }
+
+@keyframes pulseShadow {
+    from {
+        filter: drop-shadow(0 0 2px blue);
+    }
+    to {
+        filter: drop-shadow(0 0 10px blue);
+    }
+}
+
+
 
 .pip_group
 {

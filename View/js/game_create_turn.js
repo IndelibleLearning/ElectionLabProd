@@ -4,6 +4,7 @@ import * as game_map from "./game_map.js";
 
 const mapArea = document.querySelector("#map_area");
 const waitingRollArea = document.querySelector("#waiting-roll-area");
+const waitingRollAreaFirst = document.querySelector("#waiting-roll-area-first");
 
 // How long in milliseconds we wait between checks
 // for other player choosing state/turn
@@ -13,6 +14,7 @@ const SINGLE_CLICK_CODE = 1;
 const CREATE_TURN_LABEL = "Pick a swing state";
 
 let wait_turn_interval = null;
+let hasSeenFirstRollMessage = false;
 
 function setupCreateTurn()
 {
@@ -202,9 +204,16 @@ function setupTurnCallback(e)
 
 function showWaitingArea()
 {
-    
-    common.show(waitingRollArea);
-    
+    if (!hasSeenFirstRollMessage)
+    {
+        common.show(waitingRollAreaFirst)
+        hasSeenFirstRollMessage = true;
+    }
+    else
+    {
+        common.show(waitingRollArea);
+    }
+
     // kick of the holding pattern where we check every x seconds
     
     startCheckingForTurn();
@@ -246,4 +255,5 @@ function hideWaitingArea()
 {
     clearInterval(wait_turn_interval);
     common.hide(waitingRollArea);
+    common.hide(waitingRollAreaFirst);
 }
