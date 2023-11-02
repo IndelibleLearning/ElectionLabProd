@@ -218,29 +218,30 @@
 .selectable-state path {
     stroke: blue;
     stroke-width: 3px;
-    animation: pulseShadow 1.2s infinite alternate;
+    animation: pulseFill 2s infinite; /* 2 seconds duration, but adjust to your liking */
 }
 
 .selectable-state:hover path {
-    fill: #ba9550;
+    fill: #ba9550; /* hover color */
     cursor: pointer;
     stroke: #ba9550;
-    animation: none;
 }
 
 .selectable-state.selected path {
+    fill: #ba9550; /* selected color (but has to split 50/50 with the pulse fill) */
     animation: none;
 }
 
-@keyframes pulseShadow {
-    from {
-        filter: drop-shadow(0 0 2px blue);
+@keyframes pulseFill {
+    0%, 100% {
+        fill-opacity: .5; /* this makes pulse only cover 50% of the color - need this for timing */
+        fill: #F9E4C5; /* original fill color */
     }
-    to {
-        filter: drop-shadow(0 0 10px blue);
+    50% {
+        fill-opacity: .5;
+        fill: #00ff00; /* the color you want to pulse to */
     }
 }
-
 
 
 .pip_group
