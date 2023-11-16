@@ -23,6 +23,7 @@ export const UPDATE_PLAYER_FRESHNESS_BASE = `${api_common.API_URL_BASE}/update_p
 export const DASHBOARD_URL = `${api_common.VIEW_URL_BASE}/user_dashboard.php`
 const ROOM_URL_BASE = `${api_common.VIEW_URL_BASE}/player_list_view.php`;
 const LOGIN_VIEW_URL = `${api_common.VIEW_URL_BASE}/login_view.php`;
+export const LOGIN_GOOGLE_URL = `${api_common.API_URL_BASE}/login_google.php`;
 
 export function setLoginToken(token)
 {

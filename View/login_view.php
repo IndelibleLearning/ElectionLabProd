@@ -41,7 +41,9 @@
 
 
                     <!-- Submit button -->
-                    <button type="submit" id="submit" class="btn btn-light btn-block mb-4">Login</button>
+                      <button type="submit" id="submit" class="btn btn-light btn-block mb-4">Login</button>
+                      <!-- Automatic rendering -->
+                      <button type="submit" id="google-submit" class="btn btn-light btn-block mb-4">google</button>
 
                   </div>
 
@@ -56,5 +58,7 @@
   </div>
 </section>
 <script type="module" src="js/login_view.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
  </body>
 </html>

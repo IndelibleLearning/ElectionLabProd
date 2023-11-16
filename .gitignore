@@ -1,0 +1,9 @@
+# build output
+ELOReact
+
+# dependencies
+React/Code/node_modules/
+inc/vendor
+
+# editor
+.idea
