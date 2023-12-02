@@ -1,0 +1,32 @@
+.login-main
+{
+  background: url("/assets/bg1.jpg");
+  height: 100%;
+}
+
+.login-container
+{
+  backdrop-filter: blur(5px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-title
+{
+  padding-bottom: 10px;
+  max-width: 50%;
+}
+
+.login-form
+{
+  background: #e96656;
+  width: 50%;
+  height: 200px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

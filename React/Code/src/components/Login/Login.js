@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import * as request from 'common/request.js';
 import * as user_common from 'common/user_common.js';
+import './Login.scss';
+import loginTitle from "assets/LabTitle2.svg";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    let navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -39,7 +43,7 @@ const Login = () => {
                 user_common.setUserName(res.data.username);
 
                 // redirect to
-                window.location.href = user_common.DASHBOARD_URL;
+                navigate('/dashboard');
             });
     };
 
@@ -49,14 +53,19 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <button
-                id="google-submit"
-                onClick={onGoogleSignIn}
-                disabled={isLoading}
-            >
-                {isLoading ? 'Logging in...' : 'Login with Google'}
-            </button>
+        <div className="login-main">
+            <div className="login-container">
+                <img className="login-title" src={loginTitle}/>
+                <div className="login-form">
+                    <button
+                        id="google-submit"
+                        onClick={onGoogleSignIn}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Logging in...' : 'Login with Google'}
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };
