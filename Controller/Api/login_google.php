@@ -1,8 +1,10 @@
 <?php
 require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
+require_once PROJECT_ROOT_PATH . "/Controller/Api/access_control.php";
 require_once PROJECT_ROOT_PATH . "/inc/vendor/autoload.php";
 require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
 
+checkAccessControl();
 $userModel = new UserModel();
 
 $clientId = "887227153285-7ol0k70995346nef307c9ckesrai7rft.apps.googleusercontent.com";
