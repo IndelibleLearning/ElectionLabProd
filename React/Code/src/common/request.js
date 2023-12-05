@@ -16,28 +16,38 @@ export function get(url)
     });
 }
 
-export function post(url, data)
-{
-    return fetch(url, {
-		method: "POST",
-		headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-	})
-   .then(response => response.json())
-   .then(res=> {
-       if (res.has_errors && res.err_code === INCORRECT_TOKEN_CODE)
-       {
-           user_common.goToLogin();
-           return;
-       }
-       return res;
-   })
-    .catch((error) => {
-      console.log('Error: ', error);
-    });
+export async function post(url, data) {
+    try {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+        if (responseData.has_errors) {
+            if (responseData.err_code === INCORRECT_TOKEN_CODE) {
+                user_common.goToLogin();
+                return;
+            }
+            throw new Error(`Server error: ${responseData.err_code}`);
+        }
+
+        return responseData.data;
+    } catch (error) {
+        console.error('Error in post request:', error);
+        throw error; // Re-throw the error for the caller to handle
+    }
 }
+
 
 export function queryParam(param_name)
 {

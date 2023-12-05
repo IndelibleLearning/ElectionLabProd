@@ -1,10 +1,12 @@
 <?php
+
     session_start();
     require dirname(dirname(dirname(__FILE__))) . "/inc/bootstrap.php";
     require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
     require_once PROJECT_ROOT_PATH . "/Model/RoomModel.php";
+    require_once PROJECT_ROOT_PATH . "/Controller/Api/access_control.php";
+    checkAccessControl();
     header('Content-Type: application/json; charset=utf-8');
-    
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     

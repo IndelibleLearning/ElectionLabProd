@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as request from 'common/request.js';
+import { post } from 'common/request.js';
 import * as user_common from 'common/user_common.js';
 import './Login.scss';
 import loginTitle from "assets/LabTitle2.svg";
@@ -28,19 +28,13 @@ const Login = () => {
             "google_id": token
         };
 
-        request.post(url, postData)
-            .then(res => {
-                console.log(res);
-                if (res.has_errors)
-                {
-                    alert(res.err_msg);
-                    setIsLoading(false); // Start loading
-                    return;
-                }
+        post(url, postData)
+            .then(data => {
+                console.log(data);
 
                 // successful login
-                user_common.setLoginToken(res.data.login_token);
-                user_common.setUserName(res.data.username);
+                user_common.setLoginToken(data.login_token);
+                user_common.setUserName(data.username);
 
                 // redirect to
                 navigate('/dashboard');
